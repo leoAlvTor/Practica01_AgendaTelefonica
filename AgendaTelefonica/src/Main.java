@@ -18,36 +18,39 @@ public class Main {
 		System.out.println(objUsuario + "++" + usuarioDao);
 		
 		// Create
+		usuarioDao.create(objUsuario);
+		// Read
+		System.out.println(usuarioDao.read("0101130862").toString());
+		// Update
+		objUsuario.setNombre("Celso Leonardo");
+		objUsuario.setApellido("Alvarado Torres");
+		usuarioDao.update(objUsuario);
+		// FIND
+		System.out.println(usuarioDao.find());
+		// Listar Telefonos
+		System.out.println(usuarioDao.listarTelefonos("0101130862"));
 		
 		
 		Telefono t = new Telefono();
+		t.setCodigo(1);
 		t.setNumero("0979395837");
 		t.setTipo("Celular");
 		t.setOperadora("Movaistar");
 		t.setFk_cedula("0101130862");
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		usuarioDao.create(objUsuario);
+		// Create
 		telefonoDao.create(t);
+		// Read
+		System.out.println(telefonoDao.read(1).toString());
+		// Update
+		t.setNumero("0988847177");
+		t.setOperadora("Oscuro");
+		telefonoDao.update(t);
+		// Find
+		System.out.println(telefonoDao.find());
 		
-		System.out.println("--> Creacion de usuario: " + usuarioDao.find());
-		System.out.println("--> Creacion de telefono: " + telefonoDao.find());
-		
-		System.out.println("--> Buscar por id: " + usuarioDao.read(objUsuario.getCedula()));
-		System.out.println("--> Listar telefonos x cedula: "+ usuarioDao.listarTelefonos(objUsuario.getCedula()));
-		
+		// DELETE DE TELEFONO
+		//telefonoDao.delete(t);
 		
 		
 	}
