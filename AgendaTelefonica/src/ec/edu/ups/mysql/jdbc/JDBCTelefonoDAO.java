@@ -31,13 +31,13 @@ public class JDBCTelefonoDAO extends JDBCGenericDAO<Telefono, Integer> implement
 
 	@Override
 	public void create(Telefono telefono) {
-		String telefonoCreate = "INSERT telefono VALUES ("
-				+ telefono.getNumero() + ", "
-				+ telefono.getTipo() + ", "
-				+ telefono.getOperadora() + ", "
-				+ telefono.getFk_cedula() + ", "					
+		String telefonoCreate = "INSERT telefono VALUES (NULL, '"
+				+ telefono.getNumero() + "', '"
+				+ telefono.getTipo() + "', '"
+				+ telefono.getOperadora() + "', '"
+				+ telefono.getFk_cedula() + "'"					
 				+ ")";
-		System.out.println("");
+		System.out.println(telefonoCreate);
 		conexionUno.update(telefonoCreate);
 	}
 
@@ -90,13 +90,6 @@ public class JDBCTelefonoDAO extends JDBCGenericDAO<Telefono, Integer> implement
 		}
 		return lstTelefonos;
 	}
-
-	@Override
-	public Set<Telefono> buscarPorTelefonoID(int telefonoID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
 	
 }

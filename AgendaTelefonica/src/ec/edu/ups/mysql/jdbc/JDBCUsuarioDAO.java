@@ -30,12 +30,12 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 
 	@Override
 	public void create(Usuario usuario) {
-		String insertUsuario = "INSERT usuario VALUES ("+
-				usuario.getCedula() + "," +
-				usuario.getNombre() + "," +
-				usuario.getApellido() + "," +
-				usuario.getCorreo() + "," +
-				usuario.getPassword() + ")";
+		String insertUsuario = "INSERT usuario VALUES ('"+
+				usuario.getCedula() + "', '" +
+				usuario.getNombre() + "', '" +
+				usuario.getApellido() + "', '" +
+				usuario.getCorreo() + "', '" +
+				usuario.getPassword() + "')";
 		System.out.println("Insert usuario -->" + insertUsuario);
 		conexionUno.update(insertUsuario);
 	}
@@ -43,7 +43,7 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 	@Override
 	public Usuario read(String cedula) {
 		Usuario usuario = null;
-		ResultSet rs = conexionUno.query("Select * from uuario where usu_cedula="+cedula);
+		ResultSet rs = conexionUno.query("Select * from usuario where usu_cedula="+cedula);
 		try {
 			if(rs != null && rs.next()) {
 				usuario = new Usuario(rs.getString(1), rs.getString(2), rs.getString(3),
@@ -97,11 +97,11 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 	@Override
 	public Set<Telefono> listarTelefonos(String cedula) {
 		Set<Telefono> telefonos = new HashSet<Telefono>();
-		ResultSet rs = conexionUno.query("select * from telefonos where fk_usu_cedula = " + cedula);
+		ResultSet rs = conexionUno.query("select * from telefono where fk_usu_cedula = " + cedula);
 		if(rs != null) {
 			try {
 				while(rs.next()) {
-					Telefono tf = new Telefono(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(4));
+					Telefono tf = new Telefono(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
 					telefonos.add(tf);
 				}
 			}catch(SQLException e) {
