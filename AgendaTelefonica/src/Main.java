@@ -17,11 +17,27 @@ public class Main {
 		objUsuario.setPassword("pass");
 		System.out.println(objUsuario + "++" + usuarioDao);
 		
+		// Create
+		
+		
 		Telefono t = new Telefono();
 		t.setNumero("0979395837");
 		t.setTipo("Celular");
 		t.setOperadora("Movaistar");
 		t.setFk_cedula("0101130862");
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		usuarioDao.create(objUsuario);
 		telefonoDao.create(t);
