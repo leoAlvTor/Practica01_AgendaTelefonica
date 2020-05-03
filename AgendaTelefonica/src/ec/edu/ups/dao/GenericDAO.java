@@ -6,7 +6,7 @@ public interface GenericDAO<T, ID> {
 	
 	public void createTable();
 	
-	public void create(T entity);
+	public boolean create(T entity);
 	
 	public T read(ID id);
 	

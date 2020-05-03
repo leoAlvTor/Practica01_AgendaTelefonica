@@ -10,17 +10,18 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet Filter implementation class FiltroUsuario
+ * Servlet Filter implementation class FilterPrivate
  */
-@WebFilter({"/FiltroUsuario", "/ServletLogin"})
-public class FiltroUsuario implements Filter {
+@WebFilter({"/FilterPrivate", "/ServletRegister"})
+public class FilterPrivate implements Filter {
 
     /**
      * Default constructor. 
      */
-    public FiltroUsuario() {
+    public FilterPrivate() {
         // TODO Auto-generated constructor stub
     }
 
@@ -35,10 +36,12 @@ public class FiltroUsuario implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		if(request.getParameter("btn").equals("ingresar")) {
+		HttpSession sesion = ((HttpServletRequest) request).getSession(false);
+		System.out.println("ME LLAMARON!");
+		if(sesion != null && (boolean) sesion.getAttribute("logeado")) {
 			chain.doFilter(request, response);
-		}else if(request.getParameter("btn").equals("registrarme")){
-			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath()+"/public/Register.jsp");
+		}else {
+			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath()+"/public/Index.html");
 		}
 	}
 

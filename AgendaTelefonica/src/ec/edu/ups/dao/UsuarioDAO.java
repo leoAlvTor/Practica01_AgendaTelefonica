@@ -9,4 +9,6 @@ public interface UsuarioDAO extends GenericDAO<Usuario, String>{
 	
 	public abstract Set<Telefono> listarTelefonos(String cedula);
 	
+	public abstract boolean logInUsuario(String usuario, String password);
+	
 }

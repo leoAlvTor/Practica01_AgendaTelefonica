@@ -29,7 +29,7 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 	}
 
 	@Override
-	public void create(Usuario usuario) {
+	public boolean create(Usuario usuario) {
 		String insertUsuario = "INSERT usuario VALUES ('"+
 				usuario.getCedula() + "', '" +
 				usuario.getNombre() + "', '" +
@@ -37,7 +37,7 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 				usuario.getCorreo() + "', '" +
 				usuario.getPassword() + "')";
 		System.out.println("Insert usuario -->" + insertUsuario);
-		conexionUno.update(insertUsuario);
+		return conexionUno.update(insertUsuario);
 	}
 
 	@Override
@@ -112,8 +112,21 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 			return null;
 		}
 	}
-	
-	
 
+	@Override
+	public boolean logInUsuario(String correo, String password) {
+		ResultSet rs = conexionUno.query("select * from usuario where usu_correo = '" + correo + "' and usu_contrasena= '" + password + "'");
+		try {
+			if(rs != null && rs.first()) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+
+	
 	
 }

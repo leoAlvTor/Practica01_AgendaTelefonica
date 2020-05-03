@@ -30,7 +30,7 @@ public class JDBCTelefonoDAO extends JDBCGenericDAO<Telefono, Integer> implement
 	}
 
 	@Override
-	public void create(Telefono telefono) {
+	public boolean create(Telefono telefono) {
 		String telefonoCreate = "INSERT telefono VALUES (NULL, '"
 				+ telefono.getNumero() + "', '"
 				+ telefono.getTipo() + "', '"
@@ -38,7 +38,7 @@ public class JDBCTelefonoDAO extends JDBCGenericDAO<Telefono, Integer> implement
 				+ telefono.getFk_cedula() + "'"					
 				+ ")";
 		System.out.println(telefonoCreate);
-		conexionUno.update(telefonoCreate);
+		return conexionUno.update(telefonoCreate);
 	}
 
 	@Override
