@@ -15,7 +15,8 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class FilterPrivate
  */
-@WebFilter({"/FilterPrivate", "/ServletRegister"})
+@WebFilter(filterName="filterPrivate",
+urlPatterns="/private/*")
 public class FilterPrivate implements Filter {
 
     /**
@@ -36,12 +37,12 @@ public class FilterPrivate implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		HttpSession sesion = ((HttpServletRequest) request).getSession(false);
-		System.out.println("ME LLAMARON!");
-		if(sesion != null && (boolean) sesion.getAttribute("logeado")) {
-			chain.doFilter(request, response);
+		if(((HttpServletRequest) request).getSession(false) != null && ((HttpServletRequest) request).getSession(false).getAttribute("logeado") != null) {
+			if(((Boolean)((HttpServletRequest) request).getSession(false).getAttribute("logeado")) == true) {
+				System.out.println("Sesion iniciada correctamente!");
+			}
 		}else {
-			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath()+"/public/Index.html");
+			((HttpServletResponse)response).sendRedirect("AgendaTelefonica/public/Index.html");
 		}
 	}
 
