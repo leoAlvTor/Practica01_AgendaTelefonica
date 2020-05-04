@@ -40,9 +40,14 @@ public class FilterPrivate implements Filter {
 		if(((HttpServletRequest) request).getSession(false) != null && ((HttpServletRequest) request).getSession(false).getAttribute("logeado") != null) {
 			if(((Boolean)((HttpServletRequest) request).getSession(false).getAttribute("logeado")) == true) {
 				System.out.println("Sesion iniciada correctamente!");
+				chain.doFilter(request, response);
 			}
 		}else {
-			((HttpServletResponse)response).sendRedirect("AgendaTelefonica/public/Index.html");
+			System.out.println("Leo");
+			HttpServletResponse rsp = (HttpServletResponse) response;
+			HttpServletRequest rsq = (HttpServletRequest) request;
+			rsp.sendRedirect(rsq.getContextPath() + "/public/Index.html");
+			return;
 		}
 	}
 

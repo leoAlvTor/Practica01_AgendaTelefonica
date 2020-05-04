@@ -7,11 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Servicios</title>
-
+	<link href="../../css/editor.css" rel="stylesheet"/>
+	
 </head>
 <body>
-	
-	    <div class="container-fluid Default" style="margin-top: 2%; margin-bottom: 2%; min-height: auto; display: inline-block; position: static; float: none; text-align: center; width: auto; min-width: 100%;">
+	<div class="container-fluid Default" style="margin-top: 2%; margin-bottom: 2%; min-height: auto; display: inline-block; position: static; float: none; text-align: center; width: auto; min-width: 100%;">
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="submit" class="btn btn-secondary" style="margin-right: 1%;">Registrar Teléfono</button>
             <button type="button" class="btn btn-secondary" style="margin-right: 1%;">Modificar Registro</button>
@@ -138,7 +138,5 @@
         </div>
 
     </div> 
-	
-	
 </body>
 </html>
