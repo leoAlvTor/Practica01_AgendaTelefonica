@@ -95,7 +95,7 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 	}
 
 	@Override
-	public Set<Telefono> listarTelefonos(String cedula) {
+	public Set<Telefono> listarTelefonosCedula(String cedula) {
 		Set<Telefono> telefonos = new HashSet<Telefono>();
 		ResultSet rs = conexionUno.query("select * from telefono where fk_usu_cedula = " + cedula);
 		if(rs != null) {
@@ -106,6 +106,27 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 				}
 			}catch(SQLException e) {
 				System.out.println("Error en el metodo (JDBCUsuario : ListarTelefonos): " + e.getMessage());
+			}
+			return telefonos;
+		}else {
+			return null;
+		}
+	}
+	
+	@Override
+	public Set<Telefono> listarTelefonosCorreo(String correo) {
+		System.out.println("ME LLAMAN");
+		Set<Telefono> telefonos = new HashSet<Telefono>();
+		ResultSet rs = conexionUno.query("select * from telefono where fk_usu_cedula = "
+				+ "(select usu_cedula from usuario where usu_correo='"+correo+"')");
+		if(rs != null) {
+			try {
+				while(rs.next()) {
+					Telefono t = new Telefono(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+					telefonos.add(t);
+				}
+			}catch(SQLException e) {
+				System.out.println("Error en el metodo (JDBCUsuario: ListarTelefonosCorreo): "+ e.getMessage());
 			}
 			return telefonos;
 		}else {
@@ -126,7 +147,5 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 			return false;
 		}
 	}
-
-	
 	
 }

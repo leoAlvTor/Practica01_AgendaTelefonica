@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Servicios</title>
-	<link href="../../css/editor.css" rel="stylesheet"/>
+	<link href="/AgendaTelefonica/private/css/editor.css" rel="stylesheet"/>
 	
 </head>
 <body>
@@ -24,43 +24,44 @@
     <div class="container-fluid">
         <div class="row" style="margin-bottom: 2%;">
             <div class="col-sm-2" style="float: none;">
-            <img src="http://www.vvveb.com/vvvebjs/libs/builder/icons/image.svg" width="128" height="128"></div>
+            <img src="http://www.vvveb.com/vvvebjs/libs/builder/icons/image.svg" width="128" height="128"/></div>
             <div class=" col-5   col-sm-5">
                 <div class="form-group">
-                    <form>
+                    <form action="/AgendaTelefonica/ServletBusquedas" method="post">
                         <label>Listar Por Cédula:</label>
-                        <input type="text" class="form-control">
-                        <button class="btn btn-success" type="submit">Buscar</button>
-                    </form><br>
+                        <input type="text" class="form-control" name="cedula" placeholder="# de Cedula"/>
+                        <button class="btn btn-success" style="width=5%" name="btn" value="bscCedula" type="submit">Buscar</button>
+                    </form><br/>
                 <div class="form-group">
-                    <form>
+                    <form action="/AgendaTelefonica/ServletBusquedas" method="post">
                         <label>Listar Por Correo:</label>
-                        <input type="text" class="form-control">
-                        <button class="btn btn-success" type="submit">Buscar</button>
+                        <input type="text" class="form-control" name="correo" placeholder="Correo"'/>
+                        <button class="btn btn-success" style="width=5%" name="btn" value="bscCorreo" type="submit">Buscar</button>
                     </form>
                 </div>
                 </div>
             </div>
             <div class=" col-sm-5">
                 <div class="row">
-                    <a style="margin-right: 1%; padding: 5px; border:solid black 2px; border-radius: 2%;"  href=""><div class="col-sm-4"><img src="https://image.flaticon.com/icons/svg/58/58452.svg" width="100" height="100"></div></a>
-                    <a style="margin-right: 1%; padding: 5px; border:solid black 2px; border-radius: 2%;"  href=""><div class="col-sm-4 col-5"><img src="https://image.flaticon.com/icons/svg/2056/2056009.svg" width="100" height="100"></div></a>
-                    <a style="margin-right: 1%; padding: 5px; border:solid black 2px; border-radius: 2%;"  href=""><div class="col-sm-4"><img src="https://image.flaticon.com/icons/svg/58/58683.svg" width="100" height="100"></div></a>
+                    <a style="margin-right: 1%; padding: 5px; border:solid black 2px; border-radius: 2%;"  href=""><div class="col-sm-4"><img src="https://image.flaticon.com/icons/svg/58/58452.svg" width="100" height="100"/></div></a>
+                    <a style="margin-right: 1%; padding: 5px; border:solid black 2px; border-radius: 2%;"  href=""><div class="col-sm-4 col-5"><img src="https://image.flaticon.com/icons/svg/2056/2056009.svg" width="100" height="100"/></div></a>
+                    <a style="margin-right: 1%; padding: 5px; border:solid black 2px; border-radius: 2%;"  href=""><div class="col-sm-4"><img src="https://image.flaticon.com/icons/svg/58/58683.svg" width="100" height="100"/></div></a>
                 </div>
             </div>
         </div>
 
         <div class="row marketing">
             <div class="col-lg-6" style="text-align: left;">
-                <h4>Datos Telefónicos <br></h4>
+                <h4>Datos Telefónicos <br/></h4>
                 <ul class="list-group">
-                    <li class="list-group-item"><br>
-                        <div class="form-group"><label>Código:</label><input type="text" class="form-control"></div>
+                    <li class="list-group-item"><br/>
+                        <div class="form-group"><label>Código:</label><input type="text" class="form-control"/></div>
                     </li>
-                    <li class="list-group-item"><br>
-                        <div class="form-group"><label>Numero:</label><input type="text" class="form-control"></div>
+                    <li class="list-group-item"><br/>
+                        <div class="form-group"><label>Numero:</label><input type="text" class="form-control"/></div>
                     </li>
-                    <li class="list-group-item"><label>Tipo:</label><br>
+                    <li class="list-group-item">
+                    <label>Tipo:</label><br/>
                         <div class="form-group"><select class="form-control">
                                 <option value="convencional">Convencional</option>
                                 <option value="celular">Celular</option>
@@ -68,7 +69,7 @@
                     </li>
                 </ul>
                 <ul class="list-group">
-                    <li class="list-group-item" style="margin-bottom: 2%;"><br>
+                    <li class="list-group-item" style="margin-bottom: 2%;"><br/>
                         <div class="form-group"><label>Operadora:</label><select class="form-control">
                                 <option value="movistar">Movistar</option>
                                 <option value="claro">CNT</option>
@@ -84,34 +85,35 @@
                 </div>
                 <div class="container" style="min-height: 150px; text-align: center;">
                     <div class="btn-group" role="group" aria-label="Basic example"><button type="button"
-                            class="btn btn-secondary" style="margin-right: 2em;">Crear Nuevo Registro</button><button
-                            type="button" class="btn btn-secondary">Actualizar Datos Telefónicos</button> </div>
+                            class="btn btn-secondary" style="margin-right: 2em;">Crear Nuevo Registro</button>
+                            <button type="button" class="btn btn-secondary">Actualizar Datos Telefónicos</button> </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <h4 style="text-decoration-color: rgb(255, 28, 0); border-color: rgb(252, 6, 6);">Eliminar Registro<br>
+                <h4 style="text-decoration-color: rgb(255, 28, 0); border-color: rgb(252, 6, 6);">Eliminar Registro<br/>
                 </h4>
                 <ul class="list-group">
-                    <li class="list-group-item"><br>
-                        <div class="form-group"><label>Código:</label><input type="text" class="form-control"></div>
+                    <li class="list-group-item"><br/>
+                        <div class="form-group"><label>Código:</label><input type="text" class="form-control"/></div>
                         <button style="background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);">Eliminar Numero
                             Telefónico</button>
                     </li>
 
                 </ul>
                 <ul class="list-group">
-                    <li class="list-group-item"><br>
+                    <li class="list-group-item"><br/>
                         <div class="form-group"><label>Teléfono:</label></div>
                         <table class="table table-dark">
                             <thead>
                                 <tr>
-                                    <th>Código<br></th>
+                                    <th>Código<br/></th>
                                     <th>Numero</th>
-                                    <th>Tipo<br></th>
+                                    <th>Tipo<br/></th>
                                     <th>Operadora</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>Mark</td>

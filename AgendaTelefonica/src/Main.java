@@ -28,7 +28,7 @@ public class Main {
 		// FIND
 		System.out.println(usuarioDao.find());
 		// Listar Telefonos
-		System.out.println(usuarioDao.listarTelefonos("0101130862"));
+		System.out.println(usuarioDao.listarTelefonosCedula("0101130862"));
 		
 		
 		Telefono t = new Telefono();

@@ -40,7 +40,6 @@ public class ServletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(login(request)) {
-			System.out.println("Login");
 			if(crearSesion(request)) {
 				System.out.println("REDIRECT");
 				response.sendRedirect(request.getContextPath() + "/private/Servicios.jsp");
