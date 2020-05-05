@@ -63,6 +63,7 @@ public class ServletLogin extends HttpServlet {
 		HttpSession sesion = null;
 		sesion = request.getSession(true);
 		sesion.setAttribute("logeado", true);
+		sesion.setAttribute("usuario", request.getAttribute("usuario"));
 		return true;
 	}
 
