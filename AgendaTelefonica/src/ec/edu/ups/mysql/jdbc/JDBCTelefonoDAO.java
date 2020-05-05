@@ -42,11 +42,11 @@ public class JDBCTelefonoDAO extends JDBCGenericDAO<Telefono, Integer> implement
 	}
 
 	@Override
-	public Telefono read(Integer id) {
+	public Telefono read(Integer numero) {
 		Telefono telefono = null;
-		ResultSet rs = conexionUno.query("Select * from telefono where tel_codigo = " + id);
+		ResultSet rs = conexionUno.query("Select * from telefono where tel_numero = '" + numero + "'");
 		try {
-			if(rs != null && rs.next()) {
+			while(rs.next()) {
 				telefono = new Telefono(rs.getInt(1), rs.getString(2), 
 						rs.getString(3), rs.getString(4), rs.getString(5));
 			}
@@ -90,6 +90,24 @@ public class JDBCTelefonoDAO extends JDBCGenericDAO<Telefono, Integer> implement
 		}
 		return lstTelefonos;
 	}
+
+	@Override
+	public Telefono buscarTelefonoNumCorreo(String numero, String cedula) {
+		Telefono t = null;
+		ResultSet rs = conexionUno.query("select * from telefono where tel_numero = '" + numero +"' and fk_usu_cedula = '" +  cedula + "'");
+		try {
+			while(rs.next()) {
+				t = new Telefono(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5));
+			}
+			return t;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return t;
+		}
+	}
+	
+	
 	
 	
 }

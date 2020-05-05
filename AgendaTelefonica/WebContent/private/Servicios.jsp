@@ -16,6 +16,18 @@
         	document.getElementById("tel_codigo").value= param;
         	alert(param);
     	}
+		function buscar(){
+			let rs = prompt("Ingrese el numero a buscar:", "");
+			rs = rs.replace(/\D/g, '');
+			if (rs.length == 9 || rs.length == 10) {
+				document.getElementById("bsc_numero").value = rs;
+				document.getElementById("form_cabecera").submit();
+			}else{
+				alert('Debe ingresar un numero valido!');
+				
+			}
+			return false;
+		}
 	</script>
 
 	<c:set var="obj_tabla" value="${requestScope['lst_telefonos'] }"></c:set>
@@ -23,7 +35,8 @@
 	
 	<div class="container-fluid Default"
 		style="margin-top: 2%; margin-bottom: 2%; min-height: auto; display: inline-block; position: static; float: none; text-align: center; width: auto; min-width: 100%;">
-		<form action= "/AgendaTelefonica/ServletCabecera" method="post">
+		<form id="form_cabecera" action= "/AgendaTelefonica/ServletCabecera" method="post">
+			<input id= "bsc_numero" name="bsc_numero" type="text" style="display: none" value=""/>
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<button type="submit" class="btn btn-secondary"
 					style="margin-right: 1%;">Registrar Teléfono</button>
@@ -32,7 +45,7 @@
 				<button type="button" class="btn btn-secondary"
 					style="margin-right: 1%;">Eliminar Teléfono</button>
 				<button type="button" class="btn btn-secondary"
-					style="margin-right: 1%;">Buscar Registro</button>
+					style="margin-right: 1%;" onclick="buscar()">Buscar Registro</button>
 				<button name="btn" value="listar_numeros" type="submit" class="btn btn-secondary">Listar Mis Números</button>
 			</div>
 			</form>

@@ -2,6 +2,7 @@ package ec.edu.ups.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ec.edu.ups.dao.DAOFactory;
+import ec.edu.ups.dao.TelefonoDAO;
 import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.Telefono;
 
@@ -43,10 +45,38 @@ public class ServletCabecera extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.request = request;
 		this.response = response;
-		System.out.println(request.getParameter("btn"));
-		if(request.getParameter("btn").equals("listar_numeros"))
-			listarMisNumeros();
+		String numero = request.getParameter("bsc_numero");
+		System.out.println(numero + "<------------");
+		if(request.getParameter("btn")  != null) {
+			if(request.getParameter("btn").equals("listar_numeros"))
+				listarMisNumeros();
+		}else if(numero != null) {
+			buscarNumero(numero);
+		}
 		
+	}
+	
+	private void buscarNumero(String numero) {
+		Object[] objs = new Object[2];
+		Telefono[] tlfs = new Telefono[1];
+		TelefonoDAO t = DAOFactory.getFactory().getTelefonoDAO();
+		String correo = String.valueOf(request.getSession(false).getAttribute("usuario"));
+		UsuarioDAO usuDao = DAOFactory.getFactory().getUsuarioDAO();
+		
+		Telefono tlf = t.buscarTelefonoNumCorreo(numero, usuDao.getCedula(correo));
+		if(tlf != null) {
+			objs[0] = true;
+		}else {
+			objs[0] = false;
+		}
+		tlfs[0] = tlf;
+		objs[1] = tlfs;
+		try {
+			request.setAttribute("lst_telefonos", objs);
+			getServletContext().getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void listarMisNumeros() {
@@ -66,6 +96,7 @@ public class ServletCabecera extends HttpServlet {
 	}
 	
 	private void redirect() {
+		
 	}
 
 }
