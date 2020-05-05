@@ -70,7 +70,6 @@ public class ServletCrtUpt extends HttpServlet {
 		String correo = request.getParameter("correo");
 		UsuarioDAO usuDao = DAOFactory.getFactory().getUsuarioDAO();
 		String cedula = usuDao.getCedula(correo);
-		System.out.println("CEDULA --> " + cedula);
 		String numero = request.getParameter("numero");
 		String tipo = request.getParameter("tipo");
 		String operadora = request.getParameter("operadora");
@@ -79,7 +78,10 @@ public class ServletCrtUpt extends HttpServlet {
 	
 	private void update() {
 		TelefonoDAO tlfDao = DAOFactory.getFactory().getTelefonoDAO();
-		if(tlfDao.update(getTelefonoParams()))
+		Telefono t = getTelefonoParams();
+		t.setCodigo(Integer.parseInt(request.getParameter("tel_codigo")));
+		System.out.println(t.toString());
+		if(tlfDao.update(t))
 			System.out.println("Datos del telefono actualizados correctamente!");
 		else{
 			System.out.println("Error al actualizar el TLF");

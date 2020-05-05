@@ -11,8 +11,18 @@
 
 </head>
 <body>
+	<script>
+		function setCodigo(param){
+        	document.getElementById("tel_codigo").value= param;
+        	alert(param);
+    	}
+	</script>
+
 	<c:set var="obj_tabla" value="${requestScope['lst_telefonos'] }"></c:set>
+	<p>${obj_tabla[0]}</p>
+	
 	<c:set var="correo" scope="session" value="${usuario}"></c:set>
+	
 	<div class="container-fluid Default"
 		style="margin-top: 2%; margin-bottom: 2%; min-height: auto; display: inline-block; position: static; float: none; text-align: center; width: auto; min-width: 100%;">
 		<div class="btn-group" role="group" aria-label="Basic example">
@@ -24,8 +34,7 @@
 				style="margin-right: 1%;">Eliminar Teléfono</button>
 			<button type="button" class="btn btn-secondary"
 				style="margin-right: 1%;">Buscar Registro</button>
-			<button type="button" class="btn btn-secondary">Listar Mis
-				Números</button>
+			<button type="submit" class="btn btn-secondary">Listar Mis Números</button>
 		</div>
 	</div>
 
@@ -86,6 +95,7 @@
 						<li class="list-group-item"><br />
 							<div class="form-group">
 								<label>Mi correo:</label> 
+								<input id= "tel_codigo" name="tel_codigo" type="text" style="display: none" value=""/>
 								<input name="correo" type="text" class="form-control" value="${correo}" readonly />
 							</div></li>
 						<li class="list-group-item"><br />
@@ -149,13 +159,19 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="telefono" items="${obj_tabla}">
+								<c:if test="${obj_tabla[0] == false}">
+									<c:forEach var="telefono" items="${obj_tabla[1]}">
 										<tr>
 											<td>${telefono.numero}</td>
 											<td>${telefono.tipo}</td>
 											<td>${telefono.operadora}</td>
+
 										</tr>
 									</c:forEach>
+								</c:if>
+								
+								
+									
 								</tbody>
 							</table>
 						</c:if></li>

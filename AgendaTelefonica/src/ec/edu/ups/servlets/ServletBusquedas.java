@@ -54,11 +54,13 @@ public class ServletBusquedas extends HttpServlet {
 	}
 	
 	private void buscarCorreo(String correo) {
+		Object[] objs = new Object[2];
+		objs[0] = false;
 		UsuarioDAO usuarioDao = DAOFactory.getFactory().getUsuarioDAO();
 		List<Telefono> lstTelefonos = new ArrayList<>(usuarioDao.listarTelefonosCorreo(correo));
-
+		objs[1] = lstTelefonos;
 		try {
-			request.setAttribute("lst_telefonos", lstTelefonos);
+			request.setAttribute("lst_telefonos", objs);
 			getServletContext().getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -69,11 +71,13 @@ public class ServletBusquedas extends HttpServlet {
 	}
 	
 	private void buscarCedula(String cedula) {
+		Object[] objs = new Object[2];
+		objs[0] = false;
 		UsuarioDAO usuarioDao = DAOFactory.getFactory().getUsuarioDAO();
 		List<Telefono> lstTelefonos = new ArrayList<>(usuarioDao.listarTelefonosCedula(cedula));
-
+		objs[1] = lstTelefonos;
 		try {
-			request.setAttribute("lst_telefonos", lstTelefonos);
+			request.setAttribute("lst_telefonos", objs);
 			getServletContext().getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
 		} catch (ServletException e) {
 			e.printStackTrace();
