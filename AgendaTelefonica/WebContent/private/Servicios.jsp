@@ -19,23 +19,23 @@
 	</script>
 
 	<c:set var="obj_tabla" value="${requestScope['lst_telefonos'] }"></c:set>
-	<p>${obj_tabla[0]}</p>
-	
 	<c:set var="correo" scope="session" value="${usuario}"></c:set>
 	
 	<div class="container-fluid Default"
 		style="margin-top: 2%; margin-bottom: 2%; min-height: auto; display: inline-block; position: static; float: none; text-align: center; width: auto; min-width: 100%;">
-		<div class="btn-group" role="group" aria-label="Basic example">
-			<button type="submit" class="btn btn-secondary"
-				style="margin-right: 1%;">Registrar Teléfono</button>
-			<button type="button" class="btn btn-secondary"
-				style="margin-right: 1%;">Modificar Registro</button>
-			<button type="button" class="btn btn-secondary"
-				style="margin-right: 1%;">Eliminar Teléfono</button>
-			<button type="button" class="btn btn-secondary"
-				style="margin-right: 1%;">Buscar Registro</button>
-			<button type="submit" class="btn btn-secondary">Listar Mis Números</button>
-		</div>
+		<form action= "/AgendaTelefonica/ServletCabecera" method="post">
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<button type="submit" class="btn btn-secondary"
+					style="margin-right: 1%;">Registrar Teléfono</button>
+				<button type="button" class="btn btn-secondary"
+					style="margin-right: 1%;">Modificar Registro</button>
+				<button type="button" class="btn btn-secondary"
+					style="margin-right: 1%;">Eliminar Teléfono</button>
+				<button type="button" class="btn btn-secondary"
+					style="margin-right: 1%;">Buscar Registro</button>
+				<button name="btn" value="listar_numeros" type="submit" class="btn btn-secondary">Listar Mis Números</button>
+			</div>
+			</form>
 	</div>
 
 	<div class="container-fluid">
@@ -165,13 +165,24 @@
 											<td>${telefono.numero}</td>
 											<td>${telefono.tipo}</td>
 											<td>${telefono.operadora}</td>
-
+											
+										</tr>
+									</c:forEach>
+									
+									
+								</c:if>
+								<c:if test="${obj_tabla[0] == true}">
+									<c:forEach var="telefono" items="${obj_tabla[1]}">
+										<tr>
+											<td>${telefono.numero}</td>
+											<td>${telefono.tipo}</td>
+											<td>${telefono.operadora}</td>
+											<td>
+											<button id="${telefono.codigo}" class="btn btn-secondary" onclick="setCodigo(this.id)">Modificar</button>
+											</td>
 										</tr>
 									</c:forEach>
 								</c:if>
-								
-								
-									
 								</tbody>
 							</table>
 						</c:if></li>
