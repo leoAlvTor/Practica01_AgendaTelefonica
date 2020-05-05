@@ -13,4 +13,6 @@ public interface UsuarioDAO extends GenericDAO<Usuario, String>{
 	
 	public abstract Set<Telefono> listarTelefonosCorreo(String correo);
 	
+	public abstract String getCedula(String correo);
+	
 }

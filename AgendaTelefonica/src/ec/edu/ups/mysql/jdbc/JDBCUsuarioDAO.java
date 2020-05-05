@@ -60,7 +60,7 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 	}
 
 	@Override
-	public void update(Usuario usuario) {
+	public boolean update(Usuario usuario) {
 		System.out.println("Actualizando: " + usuario);
 		String updateUsuario = "UPDATE usuario set usu_nombre= '" + usuario.getNombre() + "', "
 				+ "usu_apellido= '" + usuario.getApellido() + "', "
@@ -68,7 +68,7 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 								+ "usu_contrasena= '" + usuario.getPassword() + "' "
 										+ "where usu_cedula= '"+ usuario.getCedula() + "'";
 		System.out.println("Update usuario -->" + updateUsuario);
-		conexionUno.update(updateUsuario);
+		return conexionUno.update(updateUsuario);
 		
 	}
 
@@ -147,5 +147,22 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 			return false;
 		}
 	}
+
+	@Override
+	public String getCedula(String correo) {
+		System.out.println("CORREO ->>" + correo);
+		String cedula = "";
+		ResultSet rs = conexionUno.query("select usu_cedula from usuario where usu_correo = '"+ correo + "'");
+		try {
+			while(rs.next())
+				cedula = rs.getString("usu_cedula");
+			return cedula;
+		}catch(SQLException e) {
+			System.out.println("Error en el metodo (JDBCUsuario: getCedula(correo) ->" + e.getMessage());
+			return "NADA DE NADA";
+		}
+	}
+	
+	
 	
 }

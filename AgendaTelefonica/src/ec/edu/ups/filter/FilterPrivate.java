@@ -37,17 +37,26 @@ public class FilterPrivate implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
 		if(((HttpServletRequest) request).getSession(false) != null && ((HttpServletRequest) request).getSession(false).getAttribute("logeado") != null) {
-			if(((Boolean)((HttpServletRequest) request).getSession(false).getAttribute("logeado")) == true) {
-				System.out.println("Sesion iniciada correctamente!");
+			if(((Boolean)((HttpServletRequest) request).getSession(false).getAttribute("logeado")) == true && (((HttpServletRequest) request).getSession(false).getAttribute("usuario")) != null) {
 				chain.doFilter(request, response);
+			}else{
+				redirectIndex(request, response);
 			}
 		}else {
-			System.out.println("Leo");
-			HttpServletResponse rsp = (HttpServletResponse) response;
-			HttpServletRequest rsq = (HttpServletRequest) request;
+			redirectIndex(request, response);
+		}
+	}
+	
+	private void redirectIndex(ServletRequest rsqS, ServletResponse rspS) {
+		HttpServletResponse rsp = (HttpServletResponse) rspS;
+		HttpServletRequest rsq = (HttpServletRequest) rsqS;
+		try {
 			rsp.sendRedirect(rsq.getContextPath() + "/public/Index.html");
 			return;
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

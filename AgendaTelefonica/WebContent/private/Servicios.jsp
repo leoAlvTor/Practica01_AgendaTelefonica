@@ -12,7 +12,7 @@
 </head>
 <body>
 	<c:set var="obj_tabla" value="${requestScope['lst_telefonos'] }"></c:set>
-
+	<c:set var="correo" scope="session" value="${usuario}"></c:set>
 	<div class="container-fluid Default"
 		style="margin-top: 2%; margin-bottom: 2%; min-height: auto; display: inline-block; position: static; float: none; text-align: center; width: auto; min-width: 100%;">
 		<div class="btn-group" role="group" aria-label="Basic example">
@@ -81,49 +81,44 @@
 				<h4>
 					Datos Telefónicos <br />
 				</h4>
-				<ul class="list-group">
-					<li class="list-group-item"><br />
-						<div class="form-group">
-							<label>Código:</label><input type="text" class="form-control" />
-						</div></li>
-					<li class="list-group-item"><br />
-						<div class="form-group">
-							<label>Numero:</label><input type="text" class="form-control" />
-						</div></li>
-					<li class="list-group-item"><label>Tipo:</label><br />
-						<div class="form-group">
-							<select class="form-control">
-								<option value="convencional">Convencional</option>
-								<option value="celular">Celular</option>
-							</select>
-						</div></li>
+				<ul class="list-group" style="">
+					<form action="/AgendaTelefonica/ServletCrtUpt" method="post">
+						<li class="list-group-item"><br />
+							<div class="form-group">
+								<label>Mi correo:</label> 
+								<input name="correo" type="text" class="form-control" value="${correo}" readonly />
+							</div></li>
+						<li class="list-group-item"><br />
+							<div class="form-group">
+								<label>Numero:</label> 
+								<input name="numero" type="text" class="form-control" />
+							</div></li>
+						<li class="list-group-item"><label>Tipo:</label><br />
+							<div class="form-group">
+								<select class="form-control" name="tipo">
+									<option value="convencional">Convencional</option>
+									<option value="celular">Celular</option>
+								</select>
+							</div></li>
+						<li class="list-group-item">
+							<div class="form-group">
+								<label>Operadora:</label>
+								<select class="form-control" name="operadora">
+									<option value="movistar">Movistar</option>
+									<option value="claro">Claro</option>
+									<option value="cnt">CNT</option>
+								</select>
+							</div>
+						</li>
+						<div class="btn-group" role="group" aria-label="Basic example"
+							style="margin-bottom: 5%; margin-top: 2%">
+							<button value="crear" name="btn" type="submit" class="btn btn-secondary"
+								style="margin-right: 2em;">Crear Nuevo Registro</button>
+							<button value="actualizar" name="btn" type="submit" class="btn btn-secondary">Actualizar
+								Datos Telefónicos</button>
+						</div>
+					</form>
 				</ul>
-				<ul class="list-group">
-					<li class="list-group-item" style="margin-bottom: 2%;"><br />
-						<div class="form-group">
-							<label>Operadora:</label><select class="form-control">
-								<option value="movistar">Movistar</option>
-								<option value="claro">CNT</option>
-								<option value="cnt">CNT</option>
-							</select>
-						</div></li>
-				</ul>
-				<div class="btn-group" role="group" aria-label="Basic example">
-				</div>
-				<div class="row">
-					<div class="col-sm-4"></div>
-					<div class="col-sm-4 col-5"></div>
-					<div class="col-sm-4"></div>
-				</div>
-				<div class="container"
-					style="min-height: 150px; text-align: center;">
-					<div class="btn-group" role="group" aria-label="Basic example">
-						<button type="button" class="btn btn-secondary"
-							style="margin-right: 2em;">Crear Nuevo Registro</button>
-						<button type="button" class="btn btn-secondary">Actualizar
-							Datos Telefónicos</button>
-					</div>
-				</div>
 			</div>
 			<div class="col-lg-6">
 				<h4
@@ -141,37 +136,34 @@
 				</ul>
 
 				<ul class="list-group">
-					<li class="list-group-item"><br/>
+					<li class="list-group-item"><br />
 						<div class="form-group">
 							<label>Lista de Teléfonos:</label>
-						</div> 
-						<c:if test="${obj_tabla != null}">
+						</div> <c:if test="${obj_tabla != null}">
 							<table class="table table-dark">
-							<thead>
-								<tr>
-									<th>Numero</th>
-									<th>Tipo</th>
-									<th>Operadora</th>
-								</tr>
-							</thead>
-							<tbody>
-							<c:forEach var="telefono" items="${obj_tabla}">
-								<tr>
-									<td>${telefono.numero}</td>
-									<td>${telefono.tipo}</td>
-									<td>${telefono.operadora}</td>
-								</tr>
-							</c:forEach>
-							</tbody>
+								<thead>
+									<tr>
+										<th>Numero</th>
+										<th>Tipo</th>
+										<th>Operadora</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="telefono" items="${obj_tabla}">
+										<tr>
+											<td>${telefono.numero}</td>
+											<td>${telefono.tipo}</td>
+											<td>${telefono.operadora}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
 							</table>
-						</c:if>
-
-					</li>
+						</c:if></li>
 				</ul>
 			</div>
 		</div>
 
 	</div>
-	
+
 </body>
 </html>

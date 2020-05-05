@@ -10,7 +10,7 @@ public interface GenericDAO<T, ID> {
 	
 	public T read(ID id);
 	
-	public void update(T entity);
+	public boolean update(T entity);
 	
 	public void delete(T entity);
 	

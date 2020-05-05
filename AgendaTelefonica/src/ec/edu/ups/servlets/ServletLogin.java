@@ -39,31 +39,33 @@ public class ServletLogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(login(request)) {
-			if(crearSesion(request)) {
-				System.out.println("REDIRECT");
+		Object[] retorno = login(request);
+		if((boolean) retorno[0]) {
+			if(crearSesion(request, String.valueOf(retorno[1]))) {
 				response.sendRedirect(request.getContextPath() + "/private/Servicios.jsp");
 			}
 		}
 	}
 	
-	private boolean login(HttpServletRequest request) {
+	private Object[] login(HttpServletRequest request) {
+		Object[] objs = new Object[2];
 		String usuario = request.getParameter("usuario");
 		String password = request.getParameter("password");
-		
 		UsuarioDAO usuarioDAO = DAOFactory.getFactory().getUsuarioDAO();
 		if(usuarioDAO.logInUsuario(usuario, password)) {
-			return true;
+			objs[0] = true;
+			objs[1] = usuario;
+			return objs;
 		}else {
-			return false;
+			return objs;
 		}
 	}
 	
-	private boolean crearSesion(HttpServletRequest request) {
+	private boolean crearSesion(HttpServletRequest request, String usuario) {
 		HttpSession sesion = null;
 		sesion = request.getSession(true);
 		sesion.setAttribute("logeado", true);
-		sesion.setAttribute("usuario", request.getAttribute("usuario"));
+		sesion.setAttribute("usuario", usuario);
 		return true;
 	}
 
