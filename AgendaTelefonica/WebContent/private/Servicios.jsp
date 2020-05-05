@@ -12,43 +12,59 @@
 </head>
 <body>
 	<script>
-		function setCodigo(param){
-        	document.getElementById("tel_codigo").value= param;
-        	alert(param);
-    	}
-		function buscar(){
+		function setCodigo(param) {
+			document.getElementById("tel_codigo").value = param;
+			alert(param);
+		}
+		function buscar() {
 			let rs = prompt("Ingrese el numero a buscar:", "");
 			rs = rs.replace(/\D/g, '');
 			if (rs.length == 9 || rs.length == 10) {
 				document.getElementById("bsc_numero").value = rs;
 				document.getElementById("form_cabecera").submit();
-			}else{
+			} else {
 				alert('Debe ingresar un numero valido!');
-				
+
 			}
 			return false;
+		}
+
+		function changeCSS(id) {
+			document.getElementById(id).style.border = 'solid 6px';
+			document.getElementById(id).style.borderRadius = '3%';
+			setTimeout(function() {
+				document.getElementById(id).style.border = '';
+			}, 1000);
 		}
 	</script>
 
 	<c:set var="obj_tabla" value="${requestScope['lst_telefonos'] }"></c:set>
 	<c:set var="correo" scope="session" value="${usuario}"></c:set>
-	
+
 	<div class="container-fluid Default"
 		style="margin-top: 2%; margin-bottom: 2%; min-height: auto; display: inline-block; position: static; float: none; text-align: center; width: auto; min-width: 100%;">
-		<form id="form_cabecera" action= "/AgendaTelefonica/ServletCabecera" method="post">
-			<input id= "bsc_numero" name="bsc_numero" type="text" style="display: none" value=""/>
+		<form id="form_cabecera" action="/AgendaTelefonica/ServletCabecera"
+			method="post">
+			<input id="bsc_numero" name="bsc_numero" type="text"
+				style="display: none" value="" />
 			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="submit" class="btn btn-secondary"
-					style="margin-right: 1%;">Registrar Teléfono</button>
+				<a href="#form1" onclick="changeCSS('form1')">
+					<button type="button" class="btn btn-secondary"
+						style="margin-right: 2%;">Registrar Teléfono</button>
+				</a> <a href="#form1" onclick="changeCSS('form1')">
+					<button type="button" class="btn btn-secondary"
+						style="margin-right: 3%;">Modificar Registro</button>
+				</a> <a href="#form1" onclick="changeCSS('form2')">
+					<button type="button" class="btn btn-secondary"
+						style="margin-right: 3%;">Eliminar Teléfono</button>
+				</a>
 				<button type="button" class="btn btn-secondary"
-					style="margin-right: 1%;">Modificar Registro</button>
-				<button type="button" class="btn btn-secondary"
-					style="margin-right: 1%;">Eliminar Teléfono</button>
-				<button type="button" class="btn btn-secondary"
-					style="margin-right: 1%;" onclick="buscar()">Buscar Registro</button>
-				<button name="btn" value="listar_numeros" type="submit" class="btn btn-secondary">Listar Mis Números</button>
+					style="margin-right: 1%;" onclick="buscar()">Buscar
+					Registro</button>
+				<button name="btn" value="listar_numeros" type="submit"
+					class="btn btn-secondary">Listar Mis Números</button>
 			</div>
-			</form>
+		</form>
 	</div>
 
 	<div class="container-fluid">
@@ -99,7 +115,7 @@
 		</div>
 
 		<div class="row marketing">
-			<div class="col-lg-6" style="text-align: left;">
+			<div class="col-lg-6" style="text-align: left;" id="form1">
 				<h4>
 					Datos Telefónicos <br />
 				</h4>
@@ -107,14 +123,15 @@
 					<form action="/AgendaTelefonica/ServletCrtUpt" method="post">
 						<li class="list-group-item"><br />
 							<div class="form-group">
-								<label>Mi correo:</label> 
-								<input id= "tel_codigo" name="tel_codigo" type="text" style="display: none" value=""/>
-								<input name="correo" type="text" class="form-control" value="${correo}" readonly />
+								<label>Mi correo:</label> <input id="tel_codigo"
+									name="tel_codigo" type="text" style="display: none" value="" />
+								<input name="correo" type="text" class="form-control"
+									value="${correo}" readonly />
 							</div></li>
 						<li class="list-group-item"><br />
 							<div class="form-group">
-								<label>Numero:</label> 
-								<input name="numero" type="text" class="form-control" />
+								<label>Numero:</label> <input name="numero" type="text"
+									class="form-control" />
 							</div></li>
 						<li class="list-group-item"><label>Tipo:</label><br />
 							<div class="form-group">
@@ -125,8 +142,8 @@
 							</div></li>
 						<li class="list-group-item">
 							<div class="form-group">
-								<label>Operadora:</label>
-								<select class="form-control" name="operadora">
+								<label>Operadora:</label> <select class="form-control"
+									name="operadora">
 									<option value="movistar">Movistar</option>
 									<option value="claro">Claro</option>
 									<option value="cnt">CNT</option>
@@ -135,27 +152,30 @@
 						</li>
 						<div class="btn-group" role="group" aria-label="Basic example"
 							style="margin-bottom: 5%; margin-top: 2%">
-							<button value="crear" name="btn" type="submit" class="btn btn-secondary"
-								style="margin-right: 2em;">Crear Nuevo Registro</button>
-							<button value="actualizar" name="btn" type="submit" class="btn btn-secondary">Actualizar
-								Datos Telefónicos</button>
+							<button value="crear" name="btn" type="submit"
+								class="btn btn-secondary" style="margin-right: 2em;">Crear
+								Nuevo Registro</button>
+							<button value="actualizar" name="btn" type="submit"
+								class="btn btn-secondary">Actualizar Datos Telefónicos</button>
 						</div>
 					</form>
 				</ul>
 			</div>
-			<div class="col-lg-6">
+			<div class="col-lg-6" id="form2">
 				<h4
 					style="text-decoration-color: rgb(255, 28, 0); border-color: rgb(252, 6, 6);">
 					Eliminar Registro<br />
 				</h4>
 				<ul class="list-group">
 					<li class="list-group-item"><br />
-						<div class="form-group">
-							<label>Código:</label><input type="text" class="form-control" />
-						</div>
-						<button
-							style="background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);">Eliminar
-							Numero Telefónico</button></li>
+						<form >
+							<div class="form-group">
+								<label>Código:</label> <input type="text" class="form-control" />
+							</div>
+							<button
+								style="background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);">Eliminar
+								Numero Telefónico</button>
+						</form></li>
 				</ul>
 
 				<ul class="list-group">
@@ -172,30 +192,31 @@
 									</tr>
 								</thead>
 								<tbody>
-								<c:if test="${obj_tabla[0] == false}">
-									<c:forEach var="telefono" items="${obj_tabla[1]}">
-										<tr>
-											<td>${telefono.numero}</td>
-											<td>${telefono.tipo}</td>
-											<td>${telefono.operadora}</td>
-											
-										</tr>
-									</c:forEach>
-									
-									
-								</c:if>
-								<c:if test="${obj_tabla[0] == true}">
-									<c:forEach var="telefono" items="${obj_tabla[1]}">
-										<tr>
-											<td>${telefono.numero}</td>
-											<td>${telefono.tipo}</td>
-											<td>${telefono.operadora}</td>
-											<td>
-											<button id="${telefono.codigo}" class="btn btn-secondary" onclick="setCodigo(this.id)">Modificar</button>
-											</td>
-										</tr>
-									</c:forEach>
-								</c:if>
+									<c:if test="${obj_tabla[0] == false}">
+										<c:forEach var="telefono" items="${obj_tabla[1]}">
+											<tr>
+												<td>${telefono.numero}</td>
+												<td>${telefono.tipo}</td>
+												<td>${telefono.operadora}</td>
+
+											</tr>
+										</c:forEach>
+
+
+									</c:if>
+									<c:if test="${obj_tabla[0] == true}">
+										<c:forEach var="telefono" items="${obj_tabla[1]}">
+											<tr>
+												<td>${telefono.numero}</td>
+												<td>${telefono.tipo}</td>
+												<td>${telefono.operadora}</td>
+												<td>
+													<button id="${telefono.codigo}" class="btn btn-secondary"
+														onclick="setCodigo(this.id)">Modificar</button>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:if>
 								</tbody>
 							</table>
 						</c:if></li>
