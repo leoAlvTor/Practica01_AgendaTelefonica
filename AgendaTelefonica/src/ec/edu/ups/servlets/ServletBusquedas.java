@@ -60,8 +60,15 @@ public class ServletBusquedas extends HttpServlet {
 		List<Telefono> lstTelefonos = new ArrayList<>(usuarioDao.listarTelefonosCorreo(correo));
 		objs[1] = lstTelefonos;
 		try {
-			request.setAttribute("lst_telefonos", objs);
-			getServletContext().getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+			if(lstTelefonos.size() == 0) {
+				request.setAttribute("error", new ec.edu.ups.modelo.Error("Error al obtener los telefonos por la cedula ingresada.",
+						"Asegurese de que haya ingresado una cedula valida."));
+				despacharPeticiones();
+			}else {
+				request.setAttribute("error", null);
+				request.setAttribute("lst_telefonos", objs);
+				despacharPeticiones();
+			}
 		} catch (ServletException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -77,13 +84,24 @@ public class ServletBusquedas extends HttpServlet {
 		List<Telefono> lstTelefonos = new ArrayList<>(usuarioDao.listarTelefonosCedula(cedula));
 		objs[1] = lstTelefonos;
 		try {
-			request.setAttribute("lst_telefonos", objs);
-			getServletContext().getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+			if(lstTelefonos.size() == 0) {
+				request.setAttribute("error", new ec.edu.ups.modelo.Error("Error al obtener los telefonos por la cedula ingresada.",
+						"Asegurese de que haya ingresado una cedula valida."));
+				despacharPeticiones();
+			}else {
+				request.setAttribute("error", null);
+				request.setAttribute("lst_telefonos", objs);
+				despacharPeticiones();
+			}
 		} catch (ServletException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		};
+	}
+	
+	private void despacharPeticiones() throws ServletException, IOException {
+		getServletContext().getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
 	}
 
 }

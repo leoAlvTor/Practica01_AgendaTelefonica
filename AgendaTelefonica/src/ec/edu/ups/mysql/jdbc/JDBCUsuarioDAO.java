@@ -109,7 +109,7 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 			}
 			return telefonos;
 		}else {
-			return null;
+			return telefonos;
 		}
 	}
 	
@@ -130,7 +130,7 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 			}
 			return telefonos;
 		}else {
-			return null;
+			return telefonos;
 		}
 	}
 
@@ -150,7 +150,6 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 
 	@Override
 	public String getCedula(String correo) {
-		System.out.println("CORREO ->>" + correo);
 		String cedula = "";
 		ResultSet rs = conexionUno.query("select usu_cedula from usuario where usu_correo = '"+ correo + "'");
 		try {

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import ec.edu.ups.dao.DAOFactory;
 import ec.edu.ups.dao.TelefonoDAO;
 import ec.edu.ups.dao.UsuarioDAO;
+import ec.edu.ups.modelo.Error;
 import ec.edu.ups.modelo.Telefono;
 
 /**
@@ -20,9 +21,9 @@ import ec.edu.ups.modelo.Telefono;
 public class ServletDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private HttpServletRequest rsq;
+    private HttpServletResponse rsp;
+	
     public ServletDelete() {
         super();
         // TODO Auto-generated constructor stub
@@ -32,7 +33,8 @@ public class ServletDelete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		this.rsq = request;
+		this.rsp = response;
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -43,17 +45,32 @@ public class ServletDelete extends HttpServlet {
 		HttpSession sesion = request.getSession(false);
 		String correo = String.valueOf(sesion.getAttribute("usuario"));
 		String id = request.getParameter("imp_delete");
-		delete(correo, id);
-		request.getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+		if(!id.equals("")) {
+			System.out.println("1");
+			delete(correo, id);
+		}else {
+			System.out.println("2");
+			request.setAttribute("error", new Error("No se ha podido eliminar el telefono.", "Debe seleccionar un numero despues de listar en la tabla."));
+			request.getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+		}
 	}
 	
-	private void delete(String ...strings) {
+	private void delete(String ...strings) throws IOException, ServletException {
 		UsuarioDAO usuario = DAOFactory.getFactory().getUsuarioDAO();
 		String cedula = usuario.getCedula(strings[0]);
 		
 		TelefonoDAO tlf = DAOFactory.getFactory().getTelefonoDAO();
 		
 		boolean rtn = tlf.delete(new Telefono(Integer.valueOf(strings[1]), "", "", "", cedula));
+		if(!rtn) {
+			System.out.println("3");
+			rsq.setAttribute("error", new ec.edu.ups.modelo.Error("No se ha podido eliminar el registro telefonico.", ""));
+			rsq.getRequestDispatcher(rsq.getContextPath()+"/private/Servicios.jsp").forward(rsq, rsp);
+		}else {
+			System.out.println("4");
+			rsq.setAttribute("error", null);
+			rsp.sendRedirect(rsq.getContextPath()+"/private/Servicios.jsp");
+		}
 		
 	}
 

@@ -48,18 +48,19 @@ public class ServletCrtUpt extends HttpServlet {
 			update();
 	}
 	
-	private void create() {
+	private void create() throws ServletException {
 		TelefonoDAO tlfDao = DAOFactory.getFactory().getTelefonoDAO();
 		if(tlfDao.create(getTelefonoParams()))
 			try {
+				request.setAttribute("error", null);
 				response.sendRedirect(request.getContextPath()+"/private/Servicios.jsp");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		else
 			try {
-				response.sendRedirect(request.getContextPath()+"/private/Servicios.jsp");
+				request.setAttribute("error", new ec.edu.ups.modelo.Error("No se ha podido crear el telefono", ""));
+				request.getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -76,15 +77,16 @@ public class ServletCrtUpt extends HttpServlet {
 		return new Telefono(0, numero, tipo, operadora, cedula);
 	}
 	
-	private void update() {
+	private void update() throws IOException, ServletException {
 		TelefonoDAO tlfDao = DAOFactory.getFactory().getTelefonoDAO();
 		Telefono t = getTelefonoParams();
 		t.setCodigo(Integer.parseInt(request.getParameter("tel_codigo")));
-		System.out.println(t.toString());
-		if(tlfDao.update(t))
-			System.out.println("Datos del telefono actualizados correctamente!");
-		else{
-			System.out.println("Error al actualizar el TLF");
+		if(tlfDao.update(t)) {
+			response.sendRedirect("/AgendaTelefonica/private/Servicios.jsp");
+			return;
+		}else{
+			request.setAttribute("error", new ec.edu.ups.modelo.Error("No se ha podido crear el telefono", ""));
+			request.getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
 		}
 		
 	}

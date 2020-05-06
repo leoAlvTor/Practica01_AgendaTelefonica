@@ -8,12 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Servicios</title>
 <link href="/AgendaTelefonica/private/css/editor.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"/>
-<style>
-body  {
-  background-image: url("https://revistas.unne.edu.ar/public/site/background/backgroundSite03.jpg");
-}
-</style>
+<link href="/AgendaTelefonica/private/css/errores.css" rel="stylesheet"/>
 </head>
 <body>
 	<script>
@@ -92,6 +87,18 @@ body  {
 			</div>
 		</form>
 	</div>
+	
+	<c:set var="p1" value="${requestScope['error']}"></c:set>
+        <c:if test="${p1 != null }">
+        	<div class="isa_error">
+   				<i class="fa fa-times-circle"></i>
+  				<p class="error"><strong>Error:</strong> ${p1.error} </p><br/>
+			</div>
+       		<div class="isa_info">
+   				<i class="fa fa-info-circle"></i>
+   				<p class="error"><strong>Causa del error:</strong> ${p1.causa} </p><br/>
+			</div>
+    	</c:if>
 
 	<div class="container-fluid">
 		<div class="row" style="margin-bottom: 2%;">
