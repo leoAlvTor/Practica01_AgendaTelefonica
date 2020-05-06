@@ -45,33 +45,45 @@ public class ServletRegister extends HttpServlet {
 		registrarUsuario(request, response);
 	}
 	
-	private void registrarUsuario(HttpServletRequest request, HttpServletResponse response) {
+	private void registrarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String cedula = request.getParameter("cedula");
+		boolean flag = false;
+		if(cedula.isEmpty()) {
+			request.setAttribute("error", new Error("No se puede crear el registro!", "La cedula esta vacia."));
+			flag = true;
+		}
 		String nombre = request.getParameter("nombre");
+		if(nombre.isEmpty()) {
+			request.setAttribute("error", new Error("No se puede crear el registro!", "El nombre esta vacio."));
+			flag = true;
+		}
 		String apellido = request.getParameter("apellido");
+		if(apellido.isEmpty()) {
+			request.setAttribute("error", new Error("No se puede crear el registro!", "El apellido esta vacio"));
+			flag = true;
+		}
 		String correo = request.getParameter("correo");
+		if(correo.isEmpty()) {
+			request.setAttribute("error", new Error("No se puede crear el registro!", "El correo esta vacio."));
+			flag = true;
+		}
 		String password = request.getParameter("password");
-		
-		Usuario usuario = new Usuario(cedula, nombre, apellido, password, correo);
-		UsuarioDAO usuarioDAO = DAOFactory.getFactory().getUsuarioDAO();
-		
-		if(usuarioDAO.create(usuario)) {
-			try {
+		if(password.isEmpty()) {
+			request.setAttribute("error", new Error("No se puede crear el registro!", "La contrasena no puede estar vacia!"));
+			flag = true;
+		}
+		if(!flag) {
+			Usuario usuario = new Usuario(cedula, nombre, apellido, password, correo);
+			UsuarioDAO usuarioDAO = DAOFactory.getFactory().getUsuarioDAO();
+			if(usuarioDAO.create(usuario)) {
 				response.sendRedirect(request.getContextPath()+"/public/Index.html");
-			} catch (IOException e) {
-				e.printStackTrace();
+			}else {
+				request.setAttribute("error", new Error("No se ha podido crear el usuario.", "La cedula que ha ingresado ya existe."));
+				String url = "/public/Register.jsp";
+				getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 		}else {
-			Error e = new Error("No se ha podido crear el usuario.", "La cedula que ha ingresado ya existe.");
-			request.setAttribute("error", e);
-			String url = "/public/Register.jsp";
-			try {
-				getServletContext().getRequestDispatcher(url).forward(request, response);
-			} catch (ServletException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			getServletContext().getRequestDispatcher("/public/Register.jsp").forward(request, response);
 		}
 	}
 

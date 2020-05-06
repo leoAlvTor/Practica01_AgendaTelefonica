@@ -25,7 +25,7 @@
    							<p class="error"><strong>Causa del error:</strong> ${p1.causa} </p><br/>
 					</div>
             </c:if>
-            <div class="container">
+            <div class="container" style="width: 70%; margin: 0 auto;">
             	<label for="cedula"><b>Cedula: </b></label>
 				<input type="text" placeholder="Cedula" name="cedula" required></input>
 				
