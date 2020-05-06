@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import ec.edu.ups.dao.DAOFactory;
 import ec.edu.ups.dao.TelefonoDAO;
 import ec.edu.ups.dao.UsuarioDAO;
+import ec.edu.ups.modelo.Error;
 import ec.edu.ups.modelo.Telefono;
 
 /**
@@ -67,10 +68,12 @@ public class ServletCabecera extends HttpServlet {
 		if(tlf != null) {
 			objs[0] = true;
 		}else {
+			request.setAttribute("error", new Error("No se ha encontrado ningun numero.", "El numero buscado no esta registrado a su nombre."));
 			objs[0] = false;
 		}
 		tlfs[0] = tlf;
 		objs[1] = tlfs;
+
 		try {
 			request.setAttribute("lst_telefonos", objs);
 			getServletContext().getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
@@ -87,6 +90,9 @@ public class ServletCabecera extends HttpServlet {
 		List<Telefono> lstTelefonos = new ArrayList<>(usuDao.listarTelefonosCorreo(correo));
 		objs[1] = lstTelefonos;
 		
+		if(lstTelefonos.size() == 0) {
+			request.setAttribute("error", new Error("No se ha encontrar ningun registro.", "No tiene registrado ningun numero telefonico para mostrar."));
+		}
 		try {
 			request.setAttribute("lst_telefonos", objs);
 			getServletContext().getRequestDispatcher("/private/Servicios.jsp").forward(request, response);

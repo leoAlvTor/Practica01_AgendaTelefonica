@@ -61,8 +61,8 @@ public class ServletBusquedas extends HttpServlet {
 		objs[1] = lstTelefonos;
 		try {
 			if(lstTelefonos.size() == 0) {
-				request.setAttribute("error", new ec.edu.ups.modelo.Error("Error al obtener los telefonos por la cedula ingresada.",
-						"Asegurese de que haya ingresado una cedula valida."));
+				request.setAttribute("error", new ec.edu.ups.modelo.Error("Error al obtener los telefonos por el correo ingresada.",
+						"Asegurese de que haya ingresado una direccion de correo valida."));
 				despacharPeticiones();
 			}else {
 				request.setAttribute("error", null);
