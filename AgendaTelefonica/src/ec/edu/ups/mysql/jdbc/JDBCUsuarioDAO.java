@@ -73,8 +73,8 @@ public class JDBCUsuarioDAO extends JDBCGenericDAO<Usuario, String> implements U
 	}
 
 	@Override
-	public void delete(Usuario usuario) {
-		// NO PIDE BORRADO :V
+	public boolean delete(Usuario usuario) {
+		return false;
 	}
 
 	@Override

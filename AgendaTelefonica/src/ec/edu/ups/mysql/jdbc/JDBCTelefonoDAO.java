@@ -71,8 +71,8 @@ public class JDBCTelefonoDAO extends JDBCGenericDAO<Telefono, Integer> implement
 	}
 
 	@Override
-	public void delete(Telefono telefono) {
-		System.out.println(conexionUno.update("delete from telefono where tel_codigo = " + telefono.getCodigo()));
+	public boolean delete(Telefono telefono) {
+		return conexionUno.update("delete from telefono where tel_codigo = " + telefono.getCodigo());
 	}
 
 	@Override

@@ -8,13 +8,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Servicios</title>
 <link href="/AgendaTelefonica/private/css/editor.css" rel="stylesheet" />
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"/>
+<style>
+body  {
+  background-image: url("https://revistas.unne.edu.ar/public/site/background/backgroundSite03.jpg");
+}
+</style>
 </head>
 <body>
 	<script>
 		function setCodigo(param) {
 			document.getElementById("tel_codigo").value = param;
-			alert(param);
+			document.getElementById("imp_delete").value = param;
 		}
 		function buscar() {
 			let rs = prompt("Ingrese el numero a buscar:", "");
@@ -24,7 +29,6 @@
 				document.getElementById("form_cabecera").submit();
 			} else {
 				alert('Debe ingresar un numero valido!');
-
 			}
 			return false;
 		}
@@ -36,6 +40,28 @@
 				document.getElementById(id).style.border = '';
 			}, 1000);
 		}
+		
+		function llamar(){
+			let numero = "";
+			
+			return false;
+		}
+		
+		function enviarCorreo(){
+			let correo = prompt("Ingrese el correo:");
+			if(verificarEmail(correo)){
+				window.location.href = "mailto:"+correo;
+			}else{
+				alert('Direccion de correo invalida');
+			}
+			return false;
+		}
+		
+		function verificarEmail(mail){
+			var re = /\S+@\S+\.\S+/;
+	        return re.test(mail);
+		}
+		
 	</script>
 
 	<c:set var="obj_tabla" value="${requestScope['lst_telefonos'] }"></c:set>
@@ -78,7 +104,7 @@
 					<form action="/AgendaTelefonica/ServletBusquedas" method="post">
 						<label>Listar Por Cédula:</label> <input type="text"
 							class="form-control" name="cedula" placeholder="# de Cedula" />
-						<button class="btn btn-success" style="" name="btn"
+						<button class="btn btn-success" style="margin-top: 1%; width: 30%" name="btn"
 							value="bscCedula" type="submit">Buscar</button>
 					</form>
 					<br />
@@ -86,7 +112,7 @@
 						<form action="/AgendaTelefonica/ServletBusquedas" method="post">
 							<label>Listar Por Correo:</label> <input type="text"
 								class="form-control" name="correo" placeholder="Correo" '/>
-							<button class="btn btn-success" style="" name="btn"
+							<button class="btn btn-success" style="margin-top: 1%; width: 30%" name="btn"
 								value="bscCorreo" type="submit">Buscar</button>
 						</form>
 					</div>
@@ -95,19 +121,9 @@
 			<div class=" col-sm-5">
 				<div class="row">
 					<a
-						style="margin-right: 1%; padding: 5px; border: solid black 2px; border-radius: 2%;"
-						href=""><div class="col-sm-4">
+						style="margin-right: 1%; padding: 5px; border: solid black 2px; border-radius: 2%; margin-left: auto;"
+						href="/AgendaTelefonica/ServletIMG?salir=true"><div class="col-sm-4">
 							<img src="https://image.flaticon.com/icons/svg/58/58452.svg"
-								width="100" height="100" />
-						</div></a> <a
-						style="margin-right: 1%; padding: 5px; border: solid black 2px; border-radius: 2%;"
-						href=""><div class="col-sm-4 col-5">
-							<img src="https://image.flaticon.com/icons/svg/2056/2056009.svg"
-								width="100" height="100" />
-						</div></a> <a
-						style="margin-right: 1%; padding: 5px; border: solid black 2px; border-radius: 2%;"
-						href=""><div class="col-sm-4">
-							<img src="https://image.flaticon.com/icons/svg/58/58683.svg"
 								width="100" height="100" />
 						</div></a>
 				</div>
@@ -168,12 +184,12 @@
 				</h4>
 				<ul class="list-group">
 					<li class="list-group-item"><br />
-						<form >
+						<form action="/AgendaTelefonica/ServletDelete" method="post">
 							<div class="form-group">
-								<label>Código:</label> <input type="text" class="form-control" />
+								<label>Código:</label> 
+								<input id="imp_delete" type="text" name="imp_delete" class="form-control" readonly/>
 							</div>
-							<button
-								style="background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);">Eliminar
+							<button style="background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);" type="submit">Eliminar
 								Numero Telefónico</button>
 						</form></li>
 				</ul>
@@ -195,7 +211,7 @@
 									<c:if test="${obj_tabla[0] == false}">
 										<c:forEach var="telefono" items="${obj_tabla[1]}">
 											<tr>
-												<td>${telefono.numero}</td>
+												<td><a href="tel:${telefono.numero}">${telefono.numero}</a></td>
 												<td>${telefono.tipo}</td>
 												<td>${telefono.operadora}</td>
 
@@ -207,7 +223,7 @@
 									<c:if test="${obj_tabla[0] == true}">
 										<c:forEach var="telefono" items="${obj_tabla[1]}">
 											<tr>
-												<td>${telefono.numero}</td>
+												<td><a href="tel:${telefono.numero}">${telefono.numero}</a></td>
 												<td>${telefono.tipo}</td>
 												<td>${telefono.operadora}</td>
 												<td>
