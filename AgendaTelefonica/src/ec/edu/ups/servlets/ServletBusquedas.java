@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ec.edu.ups.dao.DAOFactory;
+import ec.edu.ups.dao.TelefonoDAO;
 import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.Telefono;
 
@@ -57,7 +58,8 @@ public class ServletBusquedas extends HttpServlet {
 		Object[] objs = new Object[2];
 		objs[0] = false;
 		UsuarioDAO usuarioDao = DAOFactory.getFactory().getUsuarioDAO();
-		List<Telefono> lstTelefonos = new ArrayList<>(usuarioDao.listarTelefonosCorreo(correo));
+		TelefonoDAO telefonoDAO = DAOFactory.getFactory().getTelefonoDAO();
+		List<Telefono> lstTelefonos = new ArrayList<>(telefonoDAO.listarTelefonosCorreo(correo));
 		objs[1] = lstTelefonos;
 		try {
 			if(lstTelefonos.size() == 0) {
@@ -78,7 +80,8 @@ public class ServletBusquedas extends HttpServlet {
 		Object[] objs = new Object[2];
 		objs[0] = false;
 		UsuarioDAO usuarioDao = DAOFactory.getFactory().getUsuarioDAO();
-		List<Telefono> lstTelefonos = new ArrayList<>(usuarioDao.listarTelefonosCedula(cedula));
+		TelefonoDAO telefonoDAO = DAOFactory.getFactory().getTelefonoDAO();
+		List<Telefono> lstTelefonos = new ArrayList<>(telefonoDAO.listarTelefonosCedula(cedula));
 		objs[1] = lstTelefonos;
 		try {
 			if(lstTelefonos.size() == 0) {

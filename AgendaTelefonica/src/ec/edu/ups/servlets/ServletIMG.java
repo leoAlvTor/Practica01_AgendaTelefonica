@@ -26,9 +26,11 @@ public class ServletIMG extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession(false).invalidate();
-		System.out.println("Se invalido la sesion!");
-		response.sendRedirect(request.getContextPath()+"/public/Index.html");
+		if(request.getSession(false) != null){
+			request.getSession(false).invalidate();
+			System.out.println("Se invalido la sesion!");
+			response.sendRedirect(request.getContextPath()+"/public/Index.html");
+		}
 	}
 
 	/**

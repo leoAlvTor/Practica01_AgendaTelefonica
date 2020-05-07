@@ -7,12 +7,8 @@ import ec.edu.ups.modelo.Usuario;
 
 public interface UsuarioDAO extends GenericDAO<Usuario, String>{
 	
-	public abstract Set<Telefono> listarTelefonosCedula(String cedula);
-	
 	public abstract boolean logInUsuario(String usuario, String password);
-	
-	public abstract Set<Telefono> listarTelefonosCorreo(String correo);
-	
+
 	public abstract String getCedula(String correo);
 	
 }

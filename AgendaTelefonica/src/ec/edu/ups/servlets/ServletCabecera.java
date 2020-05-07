@@ -84,8 +84,8 @@ public class ServletCabecera extends HttpServlet {
 		Object[] objs = new Object[2];
 		objs[0] = true;
 		String correo = String.valueOf(request.getSession(false).getAttribute("usuario"));
-		UsuarioDAO usuDao = DAOFactory.getFactory().getUsuarioDAO();
-		List<Telefono> lstTelefonos = new ArrayList<>(usuDao.listarTelefonosCorreo(correo));
+		TelefonoDAO telefonoDAO = DAOFactory.getFactory().getTelefonoDAO();
+		List<Telefono> lstTelefonos = new ArrayList<>(telefonoDAO.listarTelefonosCorreo(correo));
 		objs[1] = lstTelefonos;
 		
 		if(lstTelefonos.size() == 0) {

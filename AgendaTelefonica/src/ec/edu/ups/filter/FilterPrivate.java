@@ -16,7 +16,8 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class FilterPrivate
  */
 @WebFilter(filterName="filterPrivate",
-urlPatterns="/private/*")
+urlPatterns={"/private/*", "/ec/edu/ups/servlets/ServletCabecera.java", "/ec/edu/ups/servlets/ServletBusquedas.java",
+		"/ec/edu/ups/servlets/ServletCrtUpt.java", "/ec/edu/ups/servlets/ServletDelete.java", "/ec/edu/ups/servlets/ServletIMG.java"})
 public class FilterPrivate implements Filter {
 
     /**
@@ -37,16 +38,18 @@ public class FilterPrivate implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
-		if(((HttpServletRequest) request).getSession(false) != null && ((HttpServletRequest) request).getSession(false).getAttribute("logeado") != null) {
-			if(((Boolean) ((HttpServletRequest) request).getSession(false).getAttribute("logeado")) && (((HttpServletRequest) request).getSession(false).getAttribute("usuario")) != null) {
-				chain.doFilter(request, response);
-			}else{
+		if(((HttpServletRequest) request).getSession(false) != null){
+			if(((HttpServletRequest) request).getSession(false).getAttribute("logeado") != null) {
+				if(((Boolean) ((HttpServletRequest) request).getSession(false).getAttribute("logeado")) && (((HttpServletRequest) request).getSession(false).getAttribute("usuario")) != null) {
+					chain.doFilter(request, response);
+				}else{
+					redirectIndex(request, response);
+				}
+			}else {
 				redirectIndex(request, response);
 			}
-		}else {
-			redirectIndex(request, response);
 		}
+
 	}
 	
 	private void redirectIndex(ServletRequest rsqS, ServletResponse rspS) {
