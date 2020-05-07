@@ -28,7 +28,7 @@ public class ServletIMG extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession(false).invalidate();
 		System.out.println("Se invalido la sesion!");
-		response.sendRedirect("/AgendaTelefonica/public/Index.html");
+		response.sendRedirect(request.getContextPath()+"/public/Index.html");
 	}
 
 	/**

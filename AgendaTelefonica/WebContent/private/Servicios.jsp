@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Servicios</title>
-<link href="/AgendaTelefonica/private/css/editor.css" rel="stylesheet" />
-<link href="/AgendaTelefonica/private/css/errores.css" rel="stylesheet"/>
+<link href="/AgendaTelefonica_Web_exploded/private/css/editor.css" rel="stylesheet" />
+<link href="/AgendaTelefonica_Web_exploded/private/css/errores.css" rel="stylesheet"/>
 </head>
 <body>
 	<script>
@@ -19,7 +19,7 @@
 		function buscar() {
 			let rs = prompt("Ingrese el numero a buscar:", "");
 			rs = rs.replace(/\D/g, '');
-			if (rs.length == 9 || rs.length == 10) {
+			if (rs.length === 9 || rs.length === 10) {
 				document.getElementById("bsc_numero").value = rs;
 				document.getElementById("form_cabecera").submit();
 			} else {
@@ -64,7 +64,7 @@
 
 	<div class="container-fluid Default"
 		style="margin-top: 2%; margin-bottom: 2%; min-height: auto; display: inline-block; position: static; float: none; text-align: center; width: auto; min-width: 100%;">
-		<form id="form_cabecera" action="/AgendaTelefonica/ServletCabecera"
+		<form id="form_cabecera" action="/AgendaTelefonica_Web_exploded/ServletCabecera"
 			method="post">
 			<input id="bsc_numero" name="bsc_numero" type="text"
 				style="display: none" value="" />
@@ -108,7 +108,7 @@
 			</div>
 			<div class=" col-5   col-sm-5">
 				<div class="form-group">
-					<form action="/AgendaTelefonica/ServletBusquedas" method="post">
+					<form action="/AgendaTelefonica_Web_exploded/ServletBusquedas" method="post">
 						<label>Listar Por Cédula:</label> <input type="text"
 							class="form-control" name="cedula" placeholder="# de Cedula" />
 						<button class="btn btn-success" style="margin-top: 1%; width: 30%" name="btn"
@@ -116,7 +116,7 @@
 					</form>
 					<br />
 					<div class="form-group">
-						<form action="/AgendaTelefonica/ServletBusquedas" method="post">
+						<form action="/AgendaTelefonica_Web_exploded/ServletBusquedas" method="post">
 							<label>Listar Por Correo:</label> <input type="text"
 								class="form-control" name="correo" placeholder="Correo" '/>
 							<button class="btn btn-success" style="margin-top: 1%; width: 30%" name="btn"
@@ -129,7 +129,7 @@
 				<div class="row">
 					<a
 						style="margin-right: 1%; padding: 5px; border: solid black 2px; border-radius: 2%; margin-left: auto;"
-						href="/AgendaTelefonica/ServletIMG?salir=true"><div class="col-sm-4">
+						href="/AgendaTelefonica_Web_exploded/ServletIMG?salir=true"><div class="col-sm-4">
 							<img src="https://image.flaticon.com/icons/svg/58/58452.svg"
 								width="100" height="100" />
 						</div></a>
@@ -143,7 +143,7 @@
 					Datos Telefónicos <br />
 				</h4>
 				<ul class="list-group" style="">
-					<form action="/AgendaTelefonica/ServletCrtUpt" method="post">
+					<form action="/AgendaTelefonica_Web_exploded/ServletCrtUpt" method="post">
 						<li class="list-group-item"><br />
 							<div class="form-group">
 								<label>Mi correo:</label> <input id="tel_codigo"
@@ -191,7 +191,7 @@
 				</h4>
 				<ul class="list-group">
 					<li class="list-group-item"><br />
-						<form action="/AgendaTelefonica/ServletDelete" method="post">
+						<form action="/AgendaTelefonica_Web_exploded/ServletDelete" method="post">
 							<div class="form-group">
 								<label>Código:</label> 
 								<input id="imp_delete" type="text" name="imp_delete" class="form-control" readonly/>

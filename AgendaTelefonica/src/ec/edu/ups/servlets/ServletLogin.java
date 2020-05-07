@@ -40,10 +40,14 @@ public class ServletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Object[] retorno = login(request);
-		if((boolean) retorno[0]) {
-			if(crearSesion(request, String.valueOf(retorno[1]))) {
-				response.sendRedirect(request.getContextPath() + "/private/Servicios.jsp");
+		if(retorno[0] != null){
+			if((boolean) retorno[0]) {
+				if(crearSesion(request, String.valueOf(retorno[1]))) {
+					response.sendRedirect(request.getContextPath() + "/private/Servicios.jsp");
+				}
 			}
+		}else{
+			response.sendRedirect(request.getContextPath() + "/public/Index.html?param=true");
 		}
 	}
 	

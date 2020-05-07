@@ -67,7 +67,7 @@ public class ServletCrtUpt extends HttpServlet {
 			else
 				try {
 					request.setAttribute("error", new ec.edu.ups.modelo.Error("No se ha podido crear el telefono", ""));
-					request.getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+					request.getRequestDispatcher(request.getContextPath()+"/private/Servicios.jsp").forward(request, response);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -89,7 +89,7 @@ public class ServletCrtUpt extends HttpServlet {
 			request.setAttribute("error",
 					new Error("El numero telefonico debe tener 9 digitos (convencional) o 10 digitos (celular).",
 							"Ingreso una cantidad de digitos invalida."));
-			request.getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+			request.getRequestDispatcher(request.getContextPath()+"/private/Servicios.jsp").forward(request, response);
 			return null;
 		}
 
@@ -102,15 +102,15 @@ public class ServletCrtUpt extends HttpServlet {
 		if(t!=null && !tel_codigo.equals("")) {
 			t.setCodigo(Integer.parseInt(tel_codigo));
 			if (tlfDao.update(t)) {
-				response.sendRedirect("/AgendaTelefonica/private/Servicios.jsp");
+				response.sendRedirect(request.getContextPath()+"/private/Servicios.jsp");
 				return;
 			} else {
 				request.setAttribute("error", new ec.edu.ups.modelo.Error("No se ha podido crear el telefono", ""));
-				request.getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+				request.getRequestDispatcher(request.getContextPath()+"/private/Servicios.jsp").forward(request, response);
 			}
 		}else {
 			request.setAttribute("error", new ec.edu.ups.modelo.Error("No se ha podido actualizar el telefono.", "No ha seleccionado un registro para editar!"));
-			request.getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+			request.getRequestDispatcher(request.getContextPath()+"/private/Servicios.jsp").forward(request, response);
 		}
 
 	}

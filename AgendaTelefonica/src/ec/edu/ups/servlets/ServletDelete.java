@@ -51,7 +51,7 @@ public class ServletDelete extends HttpServlet {
 		}else {
 			System.out.println("2");
 			request.setAttribute("error", new Error("No se ha podido eliminar el telefono.", "Debe seleccionar un numero despues de listar en la tabla."));
-			request.getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+			request.getRequestDispatcher(request.getContextPath()+"/Servicios.jsp").forward(request, response);
 		}
 	}
 	

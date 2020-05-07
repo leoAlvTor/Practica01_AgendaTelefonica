@@ -6,18 +6,23 @@
         <link rel="stylesheet" href="/AgendaTelefonica_Web_exploded/public/CSS/Index.css">
     </head>
     <body>
+        <script>
+            let url_string = window.location.href;
+            if(url_string.includes("param=true")){
+                location.replace("/AgendaTelefonica_Web_exploded/public/Register.jsp");
+            }
+        </script>
         <form class="/AgendaTelefonica_Web_exploded/ServletLogin" action="/AgendaTelefonica_Web_exploded/ServletLogin" method="post">
             <div class="imgcontainer">
-              <img src="/AgendaTelefonica_Web_exploded/Images/user.png" alt="Avatar" class="avatar">
+              <img src="/AgendaTelefonica_Web_exploded/public/Images/user.png" alt="Avatar" class="avatar">
             </div>
-          
             <div class="container" style="width: 70%; margin: 0 auto;">
               <label for="user"><b>Usuario: </b>
                     <input type="text" placeholder="Ingrese su Usuario" name="usuario">
                 </label><br>
-              <label for="password"><b>Password: </b></label>
-              <input type="password" placeholder="Ingrese su Password" name="password"><br>
-
+              <label for="password"><b>Password: </b>
+                    <input type="password" placeholder="Ingrese su Password" name="password">
+                </label><br>
               <button type="submit" name="btn" value = "ingresar">Ingresar</button>
               <button type="submit" name="btn" value = "registrarme">Registrate</button>
             </div>

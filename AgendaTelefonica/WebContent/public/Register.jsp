@@ -7,12 +7,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Registrate</title>
-	<link rel="stylesheet" href="/AgendaTelefonica/public/CSS/Index.css"/>
+	<link rel="stylesheet" href="/AgendaTelefonica_Web_exploded/public/CSS/Index.css"/>
 </head>
 <body>
-	<form class="/AgendaTelefonica/ServletRegister" action="/AgendaTelefonica/ServletRegister" method="post">
+	<form class="/AgendaTelefonica/ServletRegister" action="/AgendaTelefonica_Web_exploded/ServletRegister" method="post">
 		<div class="imgcontainer">
-              <img src="/AgendaTelefonica/public/Images/user.png" alt="Avatar" class="avatar"/>
+              <img src="/AgendaTelefonica_Web_exploded/public/Images/user.png" alt="Avatar" class="avatar"/>
         </div>
         	<c:set var="p1" value="${requestScope['error']}"></c:set>
             	<c:if test="${p1 != null }">
@@ -42,7 +42,7 @@
 				<input type="password" placeholder="Password" name="password" required></input>
             	
             	<button type="submit" value = "registrarme">Registrate</button>
-            	<a href="/AgendaTelefonica/public/Index.html">Regresar al Log In</a>
+            	<a href="/AgendaTelefonica_Web_exploded/public/Index.html">Regresar al Log In</a>
             </div>
 	</form>
 </body>

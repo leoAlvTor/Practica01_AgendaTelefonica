@@ -69,12 +69,9 @@ public class ServletBusquedas extends HttpServlet {
 				request.setAttribute("lst_telefonos", objs);
 				despacharPeticiones();
 			}
-		} catch (ServletException e) {
+		} catch (ServletException | IOException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		};
-		
+		}
 	}
 	
 	private void buscarCedula(String cedula) {

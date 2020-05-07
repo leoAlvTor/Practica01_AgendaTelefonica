@@ -39,7 +39,7 @@ public class FilterPrivate implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		if(((HttpServletRequest) request).getSession(false) != null && ((HttpServletRequest) request).getSession(false).getAttribute("logeado") != null) {
-			if(((Boolean)((HttpServletRequest) request).getSession(false).getAttribute("logeado")) == true && (((HttpServletRequest) request).getSession(false).getAttribute("usuario")) != null) {
+			if(((Boolean) ((HttpServletRequest) request).getSession(false).getAttribute("logeado")) && (((HttpServletRequest) request).getSession(false).getAttribute("usuario")) != null) {
 				chain.doFilter(request, response);
 			}else{
 				redirectIndex(request, response);

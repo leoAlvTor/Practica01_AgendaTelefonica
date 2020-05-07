@@ -47,14 +47,12 @@ public class ServletCabecera extends HttpServlet {
 		this.request = request;
 		this.response = response;
 		String numero = request.getParameter("bsc_numero");
-		System.out.println(numero + "<------------");
 		if(request.getParameter("btn")  != null) {
 			if(request.getParameter("btn").equals("listar_numeros"))
 				listarMisNumeros();
 		}else if(numero != null) {
 			buscarNumero(numero);
 		}
-		
 	}
 	
 	private void buscarNumero(String numero) {

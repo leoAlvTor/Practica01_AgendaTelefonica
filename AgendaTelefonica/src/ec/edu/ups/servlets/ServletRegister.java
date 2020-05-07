@@ -81,9 +81,10 @@ public class ServletRegister extends HttpServlet {
 				request.setAttribute("error", new Error("No se ha podido crear el usuario.", "La cedula que ha ingresado ya existe."));
 				String url = "/public/Register.jsp";
 				getServletContext().getRequestDispatcher(url).forward(request, response);
+
 			}
 		}else {
-			getServletContext().getRequestDispatcher("/public/Register.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher(request.getContextPath()+"/Register.jsp").forward(request, response);
 		}
 	}
 
