@@ -5,46 +5,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Registrate</title>
-	<link rel="stylesheet" href="/AgendaTelefonica_Web_exploded/public/CSS/Index.css"/>
+	<link rel="stylesheet" href="/AgendaTelefonica_Web_exploded/public/CSS/style.css">
 </head>
 <body>
-	<form class="/AgendaTelefonica/ServletRegister" action="/AgendaTelefonica_Web_exploded/ServletRegister" method="post">
-		<div class="imgcontainer">
-              <img src="/AgendaTelefonica_Web_exploded/public/Images/user.png" alt="Avatar" class="avatar"/>
-        </div>
-        	<c:set var="p1" value="${requestScope['error']}"></c:set>
-            	<c:if test="${p1 != null }">
-            		<div class="isa_error">
-   						<i class="fa fa-times-circle"></i>
-   							<p class="error"><strong>Error:</strong> ${p1.error} </p><br/>
-					</div>
-            		<div class="isa_info">
-   						<i class="fa fa-info-circle"></i>
-   							<p class="error"><strong>Causa del error:</strong> ${p1.causa} </p><br/>
-					</div>
-            </c:if>
-            <div class="container" style="width: 70%; margin: 0 auto;">
-            	<label for="cedula"><b>Cedula: </b></label>
-				<input type="text" placeholder="Cedula" name="cedula" required></input>
-				
-				<label for="nombre"><b>Nombre: </b></label>
-				<input type="text" placeholder="Nombre" name="nombre" required></input>
-				
-				<label for="apellido"><b>Apellido: </b></label>
-				<input type="text" placeholder="Apellido" name="apellido" required></input>
-				
-				<label for="correo"><b>Correo: </b></label>
-				<input type="text" placeholder="Correo" name="correo" required></input>
-				
-				<label for="password"><b>Password: </b></label>
-				<input type="password" placeholder="Password" name="password" required></input>
-            	
-            	<button type="submit" value = "registrarme">Registrate</button>
-            	<a href="/AgendaTelefonica_Web_exploded/public/Index.html">Regresar al Log In</a>
-            </div>
-	</form>
+<div class="main">
+	<section class="signup">
+		<div class="container">
+			<div class="signup-content">
+				<div class="signup-form">
+					<h2 class="form-title">Registrate</h2>
+					<form method="POST" class="register-form" id="register-form" action="/AgendaTelefonica_Web_exploded/ServletRegister">
+						<div class="form-group">
+							<label for="cedula"><i class="zmdi zmdi-account material-icons-name"></i></label>
+							<input type="text" name="cedula" id="cedula" placeholder="Cedula"/>
+						</div>
+						<div class="form-group">
+							<label for="nombre"><i class="zmdi zmdi-email"></i></label>
+							<input type="text" name="nombre" id="nombre" placeholder="Nombres"/>
+						</div>
+						<div class="form-group">
+							<label for="apellido"><i class="zmdi zmdi-email"></i></label>
+							<input type="text" name="apellido" id="apellido" placeholder="Apellidos"/>
+						</div>
+						<div class="form-group">
+							<label for="correo"><i class="zmdi zmdi-lock"></i></label>
+							<input type="password" name="correo" id="correo" placeholder="Correo"/>
+						</div>
+						<div class="form-group">
+							<label for="password"><i class="zmdi zmdi-lock-outline"></i></label>
+							<input type="password" name="password" id="password" placeholder="Password"/>
+						</div>
+						<div class="form-group form-button">
+							<button class="form-submit" type="submit" value="registrarme">Registrate</button>
+						</div>
+					</form>
+				</div>
+				<div class="signup-image">
+					<figure><img src="/AgendaTelefonica_Web_exploded/public/Images/Login.jpg" alt="sing up image"/></figure>
+					<a href="/AgendaTelefonica_Web_exploded/public/Index.html" class="signup-image-link">Ya tienes cuenta? Inicia Sesion</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<script src="vendor/jquery/jquery.min.js"></script>
 </body>
 </html>
 
