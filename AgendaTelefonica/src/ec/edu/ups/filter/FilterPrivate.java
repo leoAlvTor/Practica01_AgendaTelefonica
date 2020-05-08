@@ -10,14 +10,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class FilterPrivate
  */
 @WebFilter(filterName="filterPrivate",
-urlPatterns={"/private/*", "/ec/edu/ups/servlets/ServletCabecera.java", "/ec/edu/ups/servlets/ServletBusquedas.java",
-		"/ec/edu/ups/servlets/ServletCrtUpt.java", "/ec/edu/ups/servlets/ServletDelete.java", "/ec/edu/ups/servlets/ServletIMG.java"})
+urlPatterns={"/private/*"})
 public class FilterPrivate implements Filter {
 
     /**

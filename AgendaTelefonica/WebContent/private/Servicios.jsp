@@ -64,7 +64,7 @@
 
 	<div class="container-fluid Default"
 		style="margin-top: 2%; margin-bottom: 2%; min-height: auto; display: inline-block; position: static; float: none; text-align: center; width: auto; min-width: 100%;">
-		<form id="form_cabecera" action="/AgendaTelefonica_Web_exploded/ServletCabecera"
+		<form id="form_cabecera" action="/AgendaTelefonica_Web_exploded/ServletCabacera"
 			method="post">
 			<input id="bsc_numero" name="bsc_numero" type="text"
 				style="display: none" value="" />

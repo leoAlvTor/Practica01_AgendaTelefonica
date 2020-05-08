@@ -1,8 +1,6 @@
 package ec.edu.ups.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.HttpRetryException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

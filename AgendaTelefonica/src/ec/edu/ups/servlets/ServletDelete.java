@@ -17,7 +17,7 @@ import ec.edu.ups.modelo.Telefono;
 /**
  * Servlet implementation class ServletDelete
  */
-@WebServlet("/ServletDelete")
+@WebServlet("/ServletDelet")
 public class ServletDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

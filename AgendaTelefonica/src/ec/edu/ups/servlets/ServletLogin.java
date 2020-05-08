@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import ec.edu.ups.dao.DAOFactory;
 import ec.edu.ups.dao.UsuarioDAO;
-import ec.edu.ups.modelo.Usuario;
 
 /**
  * Servlet implementation class ServletLogin
@@ -39,6 +38,7 @@ public class ServletLogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Me llaman!");
 		Object[] retorno = login(request);
 		if(retorno[0] != null){
 			if((boolean) retorno[0]) {
@@ -52,6 +52,7 @@ public class ServletLogin extends HttpServlet {
 	}
 	
 	private Object[] login(HttpServletRequest request) {
+		System.out.println("Metodo login");
 		Object[] objs = new Object[2];
 		String usuario = request.getParameter("usuario");
 		String password = request.getParameter("password");
@@ -66,7 +67,7 @@ public class ServletLogin extends HttpServlet {
 	}
 	
 	private boolean crearSesion(HttpServletRequest request, String usuario) {
-		HttpSession sesion = null;
+		HttpSession sesion;
 		sesion = request.getSession(true);
 		sesion.setAttribute("logeado", true);
 		sesion.setAttribute("usuario", usuario);

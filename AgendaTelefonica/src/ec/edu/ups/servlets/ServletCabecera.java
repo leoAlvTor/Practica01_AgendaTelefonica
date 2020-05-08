@@ -2,7 +2,6 @@ package ec.edu.ups.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,7 +19,7 @@ import ec.edu.ups.modelo.Telefono;
 /**
  * Servlet implementation class ServletCabecera
  */
-@WebServlet("/ServletCabecera")
+@WebServlet("/ServletCabacera")
 public class ServletCabecera extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
