@@ -17,7 +17,7 @@ import ec.edu.ups.modelo.Telefono;
 /**
  * Servlet implementation class ServletDelete
  */
-@WebServlet("/ServletDelet")
+@WebServlet(urlPatterns = "/ServletDelete")
 public class ServletDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,8 +33,6 @@ public class ServletDelete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.rsq = request;
-		this.rsp = response;
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -42,9 +40,12 @@ public class ServletDelete extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.rsq = request;
+		this.rsp = response;
 		HttpSession sesion = request.getSession(false);
 		String correo = String.valueOf(sesion.getAttribute("usuario"));
 		String id = request.getParameter("imp_delete");
+
 		if(!id.equals("")) {
 			System.out.println("1");
 			delete(correo, id);
@@ -63,11 +64,9 @@ public class ServletDelete extends HttpServlet {
 		
 		boolean rtn = tlf.delete(new Telefono(Integer.valueOf(strings[1]), "", "", "", cedula));
 		if(!rtn) {
-			System.out.println("3");
 			rsq.setAttribute("error", new ec.edu.ups.modelo.Error("No se ha podido eliminar el registro telefonico.", ""));
 			rsq.getRequestDispatcher(rsq.getContextPath()+"/private/Servicios.jsp").forward(rsq, rsp);
 		}else {
-			System.out.println("4");
 			rsq.setAttribute("error", null);
 			rsp.sendRedirect(rsq.getContextPath()+"/private/Servicios.jsp");
 		}

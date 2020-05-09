@@ -46,6 +46,8 @@ public class FilterPrivate implements Filter {
 			}else {
 				redirectIndex(request, response);
 			}
+		}else{
+			redirectIndex(request, response);
 		}
 
 	}

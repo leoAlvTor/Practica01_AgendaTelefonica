@@ -16,7 +16,7 @@ import ec.edu.ups.modelo.Telefono;
 /**
  * Servlet implementation class ServletCrtUpt
  */
-@WebServlet("/ServletCrtUpt")
+@WebServlet(urlPatterns = "/ServletCrtUpt")
 public class ServletCrtUpt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -78,8 +78,10 @@ public class ServletCrtUpt extends HttpServlet {
 
 	private Telefono getTelefonoParams() throws ServletException, IOException {
 		String correo = request.getParameter("correo");
+		System.out.println("CORREO" + correo);
 		UsuarioDAO usuDao = DAOFactory.getFactory().getUsuarioDAO();
 		String cedula = usuDao.getCedula(correo);
+		System.out.println("CEDULA: "  + cedula);
 		String numero = request.getParameter("numero");
 		String tipo = request.getParameter("tipo");
 		String operadora = request.getParameter("operadora");

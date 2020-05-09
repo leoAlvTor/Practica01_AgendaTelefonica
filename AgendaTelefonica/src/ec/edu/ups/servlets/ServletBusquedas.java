@@ -18,7 +18,7 @@ import ec.edu.ups.modelo.Telefono;
 /**
  * Servlet implementation class ServletBusquedas
  */
-@WebServlet("/ServletBusquedas")
+@WebServlet(urlPatterns = "/ServletBusquedas")
 public class ServletBusquedas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

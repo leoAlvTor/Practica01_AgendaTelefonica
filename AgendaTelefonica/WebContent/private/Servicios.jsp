@@ -18,7 +18,7 @@
 
 <body id="home-section" style="background-image: url('https://wallpaperaccess.com/full/7285.jpg');">
 
-<form style="display: none;" id="form_cabecera" action="/AgendaTelefonica_Web_exploded/ServletCabacera" method="POST">
+<form style="display: none;" id="form_cbr" action="/AgendaTelefonica_Web_exploded/ServletCabacera" method="POST">
 	<input id="bsc_numero" name="bsc_numero" type="text" style="display: none" value="" />
 	<button id="btn_listar" name="btn" value="listar_numeros" type="submit" class="btn btn-secondary" style="display: none">Listar Mis Números</button>
 </form>
@@ -38,7 +38,7 @@
 		rs = rs.replace(/\D/g, '');
 		if (rs.length === 9 || rs.length === 10) {
 			document.getElementById("bsc_numero").value = rs;
-			document.getElementById("form_cabecera").submit();
+			document.getElementById("form_cbr").submit();
 		} else {
 			alert('Debe ingresar un numero valido!');
 		}
@@ -188,9 +188,13 @@
 										<td>${telefono.tipo}</td>
 										<td>${telefono.operadora}</td>
 										<td>
-											<button id="${telefono.codigo}" class="btn btn-secondary"
+											<button id="${telefono.codigo}" class="btn btn-secondary" name="btn_modificar"
 													onclick="setCodigo(this.id)">Modificar</button>
 										</td>
+										<td>
+											<a href="#delete_form" name="${telefono.codigo}" onclick="setCodigo(this.name)">Eliminar</a>
+										</td>
+
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -215,7 +219,7 @@
 					</label>
 					<div class="input-group input-group-lg">
 						<input id="tel_codigo" name="tel_codigo" type="text" style="display: none" value="" />
-						<input type="text" class="form-control" placeholder="Mi correo" readonly>
+						<input type="text" class="form-control" value="${correo}" name="correo" readonly>
 					</div><br>
 					<label class="label">
 						<h5>Numero</h5>
@@ -257,14 +261,14 @@
 
 			<br>
 
-			<div class="form-submit">
+			<div class="form-submit" id="delete_form">
 				<form action="/AgendaTelefonica_Web_exploded/ServletDelete" method="post">
 					<h5><strong>Eliminar Registro Telefonico:</strong></h5><br>
 					<label class="label">
 						<h5>Numero Telefonico</h5>
 					</label>
 					<div class="input-group input-group-lg">
-						<input type="text" class="form-control" placeholder="Seleccione un numero de la tabla">
+						<input id="imp_delete" name="imp_delete" type="text" class="form-control" placeholder="Seleccione un numero de la tabla" readonly>
 					</div><br>
 					<div class="input-group input-group-lg">
 						<button type="submit" class="form-control btn-block btn-danger mb-2">Eliminar Numero Telefonico</button>
@@ -280,7 +284,7 @@
 			<div class="border-top">
 				<p class="copyright">
 					Copyright &copy; 2020. Designed <i class="icon-heart text-danger" aria-hidden="true"></i> by <a
-						href="https://github.com/leoAlvTor" target="_blank">Leo Alrvarado</a>
+						href="https://github.com/leoAlvTor" target="_blank">Leo Alvarado</a>
 				<p><a href="https://github.com/leoAlvTor/Practica01_AgendaTelefonica">GitHub Repository</a></p>
 				<p><a href="https://www.facebook.com/programmingCube/?ref=bookmarks">Our <small>(TMP)</small>Web Page</a>
 				</p>

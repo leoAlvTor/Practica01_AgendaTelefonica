@@ -19,7 +19,7 @@ import ec.edu.ups.modelo.Telefono;
 /**
  * Servlet implementation class ServletCabecera
  */
-@WebServlet("/ServletCabacera")
+@WebServlet(urlPatterns = "/ServletCabacera")
 public class ServletCabecera extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -79,23 +79,34 @@ public class ServletCabecera extends HttpServlet {
 		}
 	}
 	
-	private void listarMisNumeros() {
+	private void listarMisNumeros() throws IOException {
 		Object[] objs = new Object[2];
 		objs[0] = true;
-		String correo = String.valueOf(request.getSession(false).getAttribute("usuario"));
-		TelefonoDAO telefonoDAO = DAOFactory.getFactory().getTelefonoDAO();
-		List<Telefono> lstTelefonos = new ArrayList<>(telefonoDAO.listarTelefonosCorreo(correo));
-		objs[1] = lstTelefonos;
-		
-		if(lstTelefonos.size() == 0) {
-			request.setAttribute("error", new Error("No se ha encontrar ningun registro.", "No tiene registrado ningun numero telefonico para mostrar."));
-		}
+		Object object = null;
 		try {
-			request.setAttribute("lst_telefonos", objs);
-			getServletContext().getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
-		}catch(Exception e) {
-			e.printStackTrace();
+			object = request.getSession(false).getAttribute("usuario");
+		}catch (NullPointerException e){
+			response.sendRedirect(request.getContextPath()+"/private/Servicios.jsp");
 		}
+		if(object != null){
+			String correo = String.valueOf(request.getSession(false).getAttribute("usuario"));
+			TelefonoDAO telefonoDAO = DAOFactory.getFactory().getTelefonoDAO();
+			List<Telefono> lstTelefonos = new ArrayList<>(telefonoDAO.listarTelefonosCorreo(correo));
+			objs[1] = lstTelefonos;
+
+			if(lstTelefonos.size() == 0) {
+				request.setAttribute("error", new Error("No se ha encontrar ningun registro.", "No tiene registrado ningun numero telefonico para mostrar."));
+			}
+			try {
+				request.setAttribute("lst_telefonos", objs);
+				getServletContext().getRequestDispatcher("/private/Servicios.jsp").forward(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			response.sendRedirect(request.getContextPath()+"/private/Servicios.jsp");
+		}
+
 	}
 	
 	private void redirect() {
