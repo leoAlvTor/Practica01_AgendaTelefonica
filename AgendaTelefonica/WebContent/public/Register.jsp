@@ -10,9 +10,8 @@
 	<title>Registrate</title>
 	<link rel="stylesheet" href="/AgendaTelefonica_Web_exploded/public/CSS/style.css">
 </head>
-<body>
-<div class="main">
-	<section class="signup">
+<body style="display: flex; align-items: center; justify-content: center;">
+	<section class="signup" style="position: absolute; top: 50%; -ms-transform: translateY(-50%); transform: translateY(-50%);">
 		<div class="container">
 			<div class="signup-content">
 				<div class="signup-form">
@@ -32,7 +31,7 @@
 						</div>
 						<div class="form-group">
 							<label for="correo"><i class="zmdi zmdi-lock"></i></label>
-							<input type="password" name="correo" id="correo" placeholder="Correo"/>
+							<input type="text" name="correo" id="correo" placeholder="Correo"/>
 						</div>
 						<div class="form-group">
 							<label for="password"><i class="zmdi zmdi-lock-outline"></i></label>
@@ -44,13 +43,12 @@
 					</form>
 				</div>
 				<div class="signup-image">
-					<figure><img src="/AgendaTelefonica_Web_exploded/public/Images/Login.jpg" alt="sing up image"/></figure>
+					<figure><img src="/AgendaTelefonica_Web_exploded/public/Images/register.jpg" alt="sing up image"/></figure>
 					<a href="/AgendaTelefonica_Web_exploded/public/Index.html" class="signup-image-link">Ya tienes cuenta? Inicia Sesion</a>
 				</div>
 			</div>
 		</div>
 	</section>
-</div>
 <script src="vendor/jquery/jquery.min.js"></script>
 </body>
 </html>
