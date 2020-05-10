@@ -27,6 +27,7 @@
 	function setCodigo(param) {
 		document.getElementById("tel_codigo").value = param;
 		document.getElementById("imp_delete").value = param;
+		document.getElementById("numero").value = document.getElementById('col_numero').innerText;
 	}
 
 	function listar(){
@@ -122,6 +123,18 @@
 		</div>
 	</header>
 
+	<c:set var="p1" value="${requestScope['error']}"></c:set>
+	<c:if test="${p1 != null }">
+		<div class="isa_error" style="margin-top: 10%;">
+			<div class="alert alert-warning alert-dismissible fade show" role="alert" style="max-width: 70%; margin-left: auto; margin-right: auto;">
+					${p1.error}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		</div>
+	</c:if>
+
 	<section class="site-section" style="margin-top: 55px;">
 		<div class="container">
 
@@ -184,9 +197,9 @@
 							<c:if test="${obj_tabla[0] == true}">
 								<c:forEach var="telefono" items="${obj_tabla[1]}">
 									<tr>
-										<td><a href="tel:${telefono.numero}">${telefono.numero}</a></td>
-										<td>${telefono.tipo}</td>
-										<td>${telefono.operadora}</td>
+										<td id="col_numero"><a href="tel:${telefono.numero}">${telefono.numero}</a></td>
+										<td id="col_tipo">${telefono.tipo}</td>
+										<td id="col_operadora">${telefono.operadora}</td>
 										<td>
 											<button id="${telefono.codigo}" class="btn btn-secondary" name="btn_modificar"
 													onclick="setCodigo(this.id)">Modificar</button>
@@ -225,13 +238,13 @@
 						<h5>Numero</h5>
 					</label>
 					<div class="input-group input-group-lg">
-						<input type="text" class="form-control" placeholder="Numero de telefono" name="numero">
+						<input type="text" class="form-control" placeholder="Numero de telefono" name="numero" id="numero">
 					</div><br>
 					<label class="label">
 						<h5>Tipo de Telefono</h5>
 					</label>
 					<div class="input-group input-group-lg">
-						<select class="form-control" name="tipo">
+						<select class="form-control" name="tipo" id="tipo">
 							<option>Convencional</option>
 							<option>Celular</option>
 						</select>
@@ -240,11 +253,11 @@
 						<h5>Operadora</h5>
 					</label>
 					<div class="input-group input-group-lg">
-						<select class="form-control" name="operadora">
-							<option>Movistar</option>
-							<option>Claro</option>
+						<select class="form-control" name="operadora" id="operadora">
+							<option>MOVISTAR</option>
+							<option>CLARO</option>
 							<option>CNT</option>
-							<option>Etapa EP</option>
+							<option>ETAPA EP</option>
 						</select>
 					</div><br>
 					<div class="input-group input-group-lg">
@@ -256,9 +269,7 @@
 			</div>
 
 			<br>
-
 			<hr style="height:1px;border:none;color:#333;background-color:#ffff;" />
-
 			<br>
 
 			<div class="form-submit" id="delete_form">

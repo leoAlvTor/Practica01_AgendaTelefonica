@@ -57,7 +57,6 @@ public class ServletBusquedas extends HttpServlet {
 	private void buscarCorreo(String correo) {
 		Object[] objs = new Object[2];
 		objs[0] = false;
-		UsuarioDAO usuarioDao = DAOFactory.getFactory().getUsuarioDAO();
 		TelefonoDAO telefonoDAO = DAOFactory.getFactory().getTelefonoDAO();
 		List<Telefono> lstTelefonos = new ArrayList<>(telefonoDAO.listarTelefonosCorreo(correo));
 		objs[1] = lstTelefonos;
@@ -65,12 +64,11 @@ public class ServletBusquedas extends HttpServlet {
 			if(lstTelefonos.size() == 0) {
 				request.setAttribute("error", new ec.edu.ups.modelo.Error("Error al obtener los telefonos por el correo ingresada.",
 						"Asegurese de que haya ingresado una direccion de correo valida."));
-				despacharPeticiones();
 			}else {
 				request.setAttribute("error", null);
 				request.setAttribute("lst_telefonos", objs);
-				despacharPeticiones();
 			}
+			despacharPeticiones();
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}
@@ -93,11 +91,10 @@ public class ServletBusquedas extends HttpServlet {
 				request.setAttribute("lst_telefonos", objs);
 				despacharPeticiones();
 			}
-		} catch (ServletException e) {
+		} catch (ServletException | IOException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		};
+		}
+		;
 	}
 	
 	private void despacharPeticiones() throws ServletException, IOException {
