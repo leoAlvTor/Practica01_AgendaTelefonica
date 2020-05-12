@@ -1,7 +1,7 @@
 # Plataformas Web
 
 ### NRO. PRÁCTICA​: 2 
-### TÍTULO PRÁCTICA​: Desarrollo de aplicaciones usando Java EE, Mysql y patrones de
+### TÍTULO PRÁCTICA​: Desarrollo de aplicaciones usando Java EE, Mysql y patrones de diseno.
 
 ### OBJETIVO ALCANZADO:
 
